@@ -14,6 +14,76 @@ async function fetchGeminiText(prompt: string, fallback: string): Promise<string
   } catch { return fallback }
 }
 
+// ── GALVON LOGO — Void Phoenix colour theme ──────────────────────────────────
+function GalvonLogo({ size = 'full' }: { size?: 'full' | 'compact' }) {
+  if (size === 'compact') {
+    return (
+      <svg viewBox="0 0 44 44" width="36" height="36" style={{ overflow: 'visible' }}>
+        <defs>
+          <linearGradient id="lgIcon" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#7c3aed" /><stop offset="100%" stopColor="#06b6d4" />
+          </linearGradient>
+          <filter id="lgGlow"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <polygon points="22,2 40,12 40,32 22,42 4,32 4,12" fill="rgba(124,58,237,0.15)" stroke="url(#lgIcon)" strokeWidth="1.5"/>
+        {/* circuit nodes */}
+        {[[22,2],[40,12],[40,32],[22,42],[4,32],[4,12]].map(([x,y],i)=>(
+          <circle key={i} cx={x} cy={y} r="2.5" fill="#06b6d4" filter="url(#lgGlow)"/>
+        ))}
+        {/* lightning bolt */}
+        <path d="M24 11 L18 22 L22 22 L20 33 L26 21 L22 21 Z" fill="url(#lgIcon)" filter="url(#lgGlow)"/>
+        <circle cx="22" cy="22" r="3.5" fill="#7c3aed" stroke="#06b6d4" strokeWidth="1"/>
+      </svg>
+    )
+  }
+  return (
+    <svg viewBox="0 0 600 220" width="100%" style={{ maxWidth: 560, display: 'block' }}>
+      <defs>
+        <linearGradient id="lgBolt" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#06b6d4"/><stop offset="100%" stopColor="#7c3aed"/>
+        </linearGradient>
+        <linearGradient id="lgLine" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="#7c3aed"/><stop offset="100%" stopColor="#06b6d4"/>
+        </linearGradient>
+        <filter id="lgGlowF"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="lgSoft"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+
+      {/* Hexagon icon */}
+      <polygon points="75,8 135,42 135,108 75,142 15,108 15,42" fill="rgba(124,58,237,0.12)" stroke="#7c3aed" strokeWidth="1.5" opacity="0.8"/>
+      <polygon points="75,20 118,44 118,93 75,118 32,93 32,44" fill="rgba(6,182,212,0.07)" stroke="#06b6d4" strokeWidth="1" opacity="0.5"/>
+      {/* circuit nodes */}
+      {[[75,8],[135,42],[135,108],[75,142],[15,108],[15,42]].map(([x,y],i)=>(
+        <circle key={i} cx={x} cy={y} r="4" fill="#06b6d4" filter="url(#lgGlowF)" opacity="0.9"/>
+      ))}
+      {/* connecting lines */}
+      <polyline points="75,8 135,42 135,108 75,142 15,108 15,42 75,8" fill="none" stroke="#7c3aed" strokeWidth="1" opacity="0.4"/>
+      {/* lightning bolt */}
+      <path d="M84 38 L62 75 L76 75 L66 112 L90 73 L74 73 Z" fill="url(#lgBolt)" filter="url(#lgGlowF)"/>
+      <circle cx="75" cy="75" r="6" fill="#4c1d95" stroke="#06b6d4" strokeWidth="1.5"/>
+
+      {/* Wordmark GALVON */}
+      <text x="160" y="92" fontFamily="'Arial Black', Arial, sans-serif" fontWeight="900" fontSize="68" letterSpacing="12" fill="white" dominantBaseline="middle">GALVON</text>
+
+      {/* Tagline */}
+      <text x="163" y="132" fontFamily="Arial, sans-serif" fontWeight="400" fontSize="14" letterSpacing="5" fill="#06b6d4" dominantBaseline="middle">INDUSTRIAL INTELLIGENCE</text>
+
+      {/* Accent line */}
+      <rect x="163" y="147" width="390" height="1.5" rx="1" fill="url(#lgLine)" opacity="0.6"/>
+
+      {/* Product badges */}
+      <rect x="163" y="163" width="78" height="22" rx="11" fill="rgba(6,182,212,0.12)" stroke="#06b6d4" strokeWidth="1"/>
+      <text x="202" y="174" fontFamily="Arial, sans-serif" fontSize="10" fontWeight="700" fill="#67e8f9" textAnchor="middle" dominantBaseline="middle" letterSpacing="1">AMPRIS</text>
+
+      <rect x="250" y="163" width="92" height="22" rx="11" fill="rgba(56,189,248,0.1)" stroke="#38bdf8" strokeWidth="1"/>
+      <text x="296" y="174" fontFamily="Arial, sans-serif" fontSize="10" fontWeight="700" fill="#7dd3fc" textAnchor="middle" dominantBaseline="middle" letterSpacing="1">FLOWNEXUS</text>
+
+      <rect x="351" y="163" width="90" height="22" rx="11" fill="rgba(245,158,11,0.1)" stroke="#f59e0b" strokeWidth="1"/>
+      <text x="396" y="174" fontFamily="Arial, sans-serif" fontSize="10" fontWeight="700" fill="#fcd34d" textAnchor="middle" dominantBaseline="middle" letterSpacing="1">NEXAPROC</text>
+    </svg>
+  )
+}
+
 function VoidPhoenix() {
   return (
     <svg viewBox="-140 -100 280 280" width="100%" height="100%" style={{ overflow: 'visible', maxWidth: 520 }}>
@@ -184,9 +254,7 @@ export default function App() {
       <nav style={{ background: 'rgba(3,0,20,0.85)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(124,58,237,0.2)' }} className="fixed top-0 w-full z-50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div style={{ background: `linear-gradient(135deg, ${PURPLE}, ${CYAN})`, boxShadow: `0 0 20px rgba(124,58,237,0.5)` }} className="w-9 h-9 rounded-xl flex items-center justify-center">
-              <Zap size={18} className="text-white" />
-            </div>
+            <GalvonLogo size="compact" />
             <span style={{ letterSpacing: '6px', fontWeight: 900, fontSize: 20 }}>GALVON</span>
           </div>
           <div className="hidden md:flex items-center gap-8" style={{ fontSize: 14, color: 'rgba(255,255,255,0.7)' }}>
@@ -232,7 +300,12 @@ export default function App() {
               <br />
               <span style={{ fontSize: '55%', color: 'rgba(255,255,255,0.85)', fontWeight: 700, letterSpacing: 0 }}>Rise. Connect. Control.</span>
             </h1>
-            <p style={{ fontSize: 18, color: 'rgba(255,255,255,0.6)', lineHeight: 1.7, marginBottom: 36, maxWidth: 480 }}>{heroTag}</p>
+            <p style={{ fontSize: 18, color: 'rgba(255,255,255,0.6)', lineHeight: 1.7, marginBottom: 32, maxWidth: 480 }}>{heroTag}</p>
+
+            {/* Brand logo block */}
+            <div style={{ marginBottom: 32, padding: '20px 24px', background: 'rgba(124,58,237,0.07)', border: '1px solid rgba(124,58,237,0.2)', borderRadius: 16, display: 'inline-block' }}>
+              <GalvonLogo size="full" />
+            </div>
 
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
               <a href="#products" style={{ display: 'flex', alignItems: 'center', gap: 8, background: `linear-gradient(135deg, ${PURPLE}, ${CYAN})`, padding: '14px 28px', borderRadius: 12, fontWeight: 700, fontSize: 15, boxShadow: `0 0 30px rgba(124,58,237,0.4)`, color: 'white', textDecoration: 'none' }}>
@@ -386,9 +459,7 @@ export default function App() {
       <footer style={{ background: '#030014', borderTop: '1px solid rgba(124,58,237,0.15)', padding: '40px 24px' }}>
         <div className="max-w-7xl mx-auto" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 20 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <div style={{ background: `linear-gradient(135deg, ${PURPLE}, ${CYAN})`, width: 32, height: 32, borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Zap size={16} color="white" />
-            </div>
+            <GalvonLogo size="compact" />
             <span style={{ fontWeight: 900, letterSpacing: 5, fontSize: 18 }}>GALVON</span>
           </div>
           <div style={{ display: 'flex', gap: 24, fontSize: 14, color: 'rgba(255,255,255,0.4)' }}>
