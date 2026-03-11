@@ -84,105 +84,101 @@ function GalvonLogo({ size = 'full' }: { size?: 'full' | 'compact' }) {
   )
 }
 
-function VoidPhoenix() {
+function GalvonDashboard() {
+  const PURPLE = '#7c3aed'; const CYAN = '#06b6d4'; const DIM = 'rgba(255,255,255,0.45)'
+  const nodes = [[80,200],[160,160],[240,200],[320,160],[400,200],[240,130]]
+  const edges = [[0,1],[1,2],[2,3],[3,4],[1,5],[3,5],[5,2]]
+  const barH = [68,52,80,44,72,60,88]
+  const lineY = [110,100,95,105,88,92,80,86,75,82,70]
   return (
-    <svg viewBox="-140 -100 280 280" width="100%" height="100%" style={{ overflow: 'visible', maxWidth: 520 }}>
-      <defs>
-        <radialGradient id="aura" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#a855f7" stopOpacity="0.5" />
-          <stop offset="60%" stopColor="#7c3aed" stopOpacity="0.2" />
-          <stop offset="100%" stopColor="#4c1d95" stopOpacity="0" />
-        </radialGradient>
-        <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#e0aaff" />
-          <stop offset="100%" stopColor="#7c3aed" stopOpacity="0" />
-        </radialGradient>
-        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="5" result="blur" />
-          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
-        </filter>
-        <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
-          <feGaussianBlur stdDeviation="3" result="blur" />
-          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
-        </filter>
-        <linearGradient id="wingL" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.9" />
-          <stop offset="100%" stopColor="#7c3aed" stopOpacity="0.4" />
-        </linearGradient>
-        <linearGradient id="wingR" x1="100%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.9" />
-          <stop offset="100%" stopColor="#7c3aed" stopOpacity="0.4" />
-        </linearGradient>
-        <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#e0aaff" />
-          <stop offset="100%" stopColor="#7c3aed" />
-        </linearGradient>
-        <linearGradient id="tailGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#7c3aed" />
-          <stop offset="100%" stopColor="#4c1d95" stopOpacity="0.2" />
-        </linearGradient>
-      </defs>
+    <div style={{position:'relative',width:'100%',maxWidth:520}}>
+      {/* Glow backdrop */}
+      <div style={{position:'absolute',inset:0,borderRadius:20,background:'radial-gradient(ellipse at 60% 40%, rgba(124,58,237,0.25) 0%, transparent 70%)',filter:'blur(30px)',pointerEvents:'none'}}/>
+      <svg viewBox="0 0 520 400" style={{width:'100%',display:'block',filter:'drop-shadow(0 0 40px rgba(124,58,237,0.3))'}}>
+        {/* Panel bg */}
+        <rect x="0" y="0" width="520" height="400" rx="18" fill="rgba(8,3,32,0.95)" stroke="rgba(124,58,237,0.5)" strokeWidth="1.5"/>
+        {/* Header */}
+        <rect x="0" y="0" width="520" height="46" rx="18" fill="rgba(124,58,237,0.18)"/>
+        <rect x="0" y="30" width="520" height="16" fill="rgba(124,58,237,0.18)"/>
+        <circle cx="20" cy="23" r="5" fill="#ef4444" opacity="0.85"/>
+        <circle cx="36" cy="23" r="5" fill="#f59e0b" opacity="0.85"/>
+        <circle cx="52" cy="23" r="5" fill="#22c55e" opacity="0.85"/>
+        <text x="74" y="23" fontFamily="monospace" fontSize="12" fill="rgba(255,255,255,0.75)" dominantBaseline="middle">GALVON · Unified Control Center</text>
+        <circle cx="458" cy="23" r="4" fill="#22c55e"/>
+        <text x="468" y="23" fontFamily="monospace" fontSize="11" fill="#22c55e" dominantBaseline="middle">LIVE</text>
 
-      {/* Cosmic aura behind phoenix */}
-      <ellipse cx="0" cy="30" rx="120" ry="90" fill="url(#aura)" />
-      <ellipse cx="0" cy="-10" rx="60" ry="50" fill="url(#coreGlow)" opacity="0.3" />
+        {/* 3 Product status cards */}
+        {[
+          {x:12, label:'AMPRIS', sub:'Power SCADA', val:'98.2%', unit:'Uptime', color:'#06b6d4', status:'ONLINE'},
+          {x:183, label:'FLOWNEXUS', sub:'Flow SCADA', val:'3.41 MW', unit:'Throughput', color:'#38bdf8', status:'ONLINE'},
+          {x:354, label:'NEXAPROC', sub:'Process SCADA', val:'847/hr', unit:'Output', color:'#f59e0b', status:'ACTIVE'},
+        ].map((c,i) => (
+          <g key={i}>
+            <rect x={c.x} y="58" width="155" height="92" rx="10" fill="rgba(255,255,255,0.03)" stroke={c.color} strokeWidth="1" strokeOpacity="0.4"/>
+            <rect x={c.x} y="58" width="155" height="28" rx="10" fill={`${c.color}18`}/>
+            <rect x={c.x} y="72" width="155" height="14" fill={`${c.color}18`}/>
+            <circle cx={c.x+14} cy="72" r="4" fill={c.status === 'ONLINE' ? '#22c55e' : '#f59e0b'}/>
+            <text x={c.x+24} y="72" fontFamily="monospace" fontSize="10" fontWeight="bold" fill={c.color} dominantBaseline="middle" letterSpacing="1">{c.label}</text>
+            <text x={c.x+10} y="100" fontFamily="monospace" fontSize="20" fontWeight="900" fill="white" dominantBaseline="middle">{c.val}</text>
+            <text x={c.x+10} y="120" fontFamily="monospace" fontSize="10" fill="rgba(255,255,255,0.4)" dominantBaseline="middle">{c.unit}</text>
+            <rect x={c.x+95} y="112" width="50" height="16" rx="8" fill={`${c.color}20`} stroke={c.color} strokeWidth="0.8"/>
+            <text x={c.x+120} y="120" fontFamily="monospace" fontSize="9" fill={c.color} textAnchor="middle" dominantBaseline="middle">{c.status}</text>
+          </g>
+        ))}
 
-      {/* Tail feathers — long sweeping down */}
-      <path d="M-8,45 Q-30,90 -20,140 Q-10,155 0,145 Q10,155 20,140 Q30,90 8,45 Z" fill="url(#tailGrad)" filter="url(#softGlow)" />
-      <path d="M-15,50 Q-60,100 -50,155 Q-40,165 -30,150 Q-20,130 -10,100 L-8,45 Z" fill="#4c1d95" opacity="0.5" filter="url(#softGlow)" />
-      <path d="M15,50 Q60,100 50,155 Q40,165 30,150 Q20,130 10,100 L8,45 Z" fill="#4c1d95" opacity="0.5" filter="url(#softGlow)" />
-      {/* tail feather lines */}
-      {[-6,-2,2,6].map(x => (
-        <line key={x} x1={x} y1="50" x2={x * 1.5} y2="140" stroke="#a855f7" strokeWidth="0.8" opacity="0.5" />
-      ))}
+        {/* Section label */}
+        <text x="16" y="170" fontFamily="monospace" fontSize="10" fill="rgba(255,255,255,0.3)" letterSpacing="2">NETWORK TOPOLOGY</text>
 
-      {/* Left wing — upper sweep */}
-      <path d="M-18,-20 Q-65,-55 -110,-80 Q-90,-45 -55,-15 Q-35,-5 -20,5 Z" fill="url(#wingL)" filter="url(#glow)" opacity="0.9" />
-      {/* Left wing — lower sweep */}
-      <path d="M-22,15 Q-75,10 -120,35 Q-90,25 -50,18 Q-30,15 -18,10 Z" fill="#06b6d4" opacity="0.6" filter="url(#softGlow)" />
-      {/* Left wing — mid feathers */}
-      <path d="M-20,-5 Q-85,-15 -125,-5 Q-95,5 -28,8 Z" fill="#a855f7" opacity="0.5" />
-      <path d="M-18,-13 Q-70,-35 -100,-55 Q-75,-25 -22,-2 Z" fill="#c084fc" opacity="0.4" />
+        {/* Network topology */}
+        {edges.map(([a,b],i) => (
+          <line key={i} x1={nodes[a][0]} y1={nodes[a][1]} x2={nodes[b][0]} y2={nodes[b][1]} stroke={CYAN} strokeWidth="1" strokeOpacity="0.35" strokeDasharray="4,3"/>
+        ))}
+        {nodes.map(([x,y],i) => (
+          <g key={i}>
+            <circle cx={x} cy={y} r="10" fill="rgba(124,58,237,0.2)" stroke={i===5?CYAN:PURPLE} strokeWidth="1.5"/>
+            <circle cx={x} cy={y} r="4" fill={i===5?CYAN:PURPLE} opacity="0.9"/>
+          </g>
+        ))}
+        {/* Node labels */}
+        {[['Substation','A'],['Gateway','B'],['PLC','C'],['RTU','D'],['HMI','E'],['Master','']] .map(([l],i) => (
+          <text key={i} x={nodes[i][0]} y={nodes[i][1]+20} fontFamily="monospace" fontSize="8" fill="rgba(255,255,255,0.35)" textAnchor="middle">{l}</text>
+        ))}
 
-      {/* Right wing — upper sweep */}
-      <path d="M18,-20 Q65,-55 110,-80 Q90,-45 55,-15 Q35,-5 20,5 Z" fill="url(#wingR)" filter="url(#glow)" opacity="0.9" />
-      {/* Right wing — lower sweep */}
-      <path d="M22,15 Q75,10 120,35 Q90,25 50,18 Q30,15 18,10 Z" fill="#06b6d4" opacity="0.6" filter="url(#softGlow)" />
-      {/* Right wing — mid feathers */}
-      <path d="M20,-5 Q85,-15 125,-5 Q95,5 28,8 Z" fill="#a855f7" opacity="0.5" />
-      <path d="M18,-13 Q70,-35 100,-55 Q75,-25 22,-2 Z" fill="#c084fc" opacity="0.4" />
+        {/* Divider */}
+        <line x1="12" y1="230" x2="508" y2="230" stroke="rgba(124,58,237,0.2)" strokeWidth="1"/>
 
-      {/* Body */}
-      <ellipse cx="0" cy="15" rx="16" ry="38" fill="url(#bodyGrad)" filter="url(#glow)" />
+        {/* Bar chart left */}
+        <text x="16" y="244" fontFamily="monospace" fontSize="10" fill="rgba(255,255,255,0.3)" letterSpacing="2">LOAD BY SYSTEM</text>
+        {barH.map((h,i) => (
+          <g key={i}>
+            <rect x={16+i*32} y={330-h} width="22" height={h} rx="4" fill={i%2===0?PURPLE:CYAN} opacity="0.7"/>
+            <text x={16+i*32+11} y="340" fontFamily="monospace" fontSize="8" fill="rgba(255,255,255,0.3)" textAnchor="middle">W{i+1}</text>
+          </g>
+        ))}
 
-      {/* Head */}
-      <circle cx="0" cy="-28" r="16" fill="#a855f7" filter="url(#glow)" />
-      <circle cx="0" cy="-28" r="10" fill="#c084fc" />
+        {/* Line chart right */}
+        <text x="276" y="244" fontFamily="monospace" fontSize="10" fill="rgba(255,255,255,0.3)" letterSpacing="2">UPTIME TREND</text>
+        <polyline
+          points={lineY.map((y,i)=>`${276+i*22},${y+220}`).join(' ')}
+          fill="none" stroke={CYAN} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        {/* Area fill */}
+        <polyline
+          points={`276,350 ${lineY.map((y,i)=>`${276+i*22},${y+220}`).join(' ')} ${276+10*22},350`}
+          fill={`${CYAN}18`} stroke="none"/>
+        {lineY.map((y,i) => (
+          <circle key={i} cx={276+i*22} cy={y+220} r="2.5" fill={CYAN} opacity="0.8"/>
+        ))}
 
-      {/* Crest feathers */}
-      <path d="M-4,-42 Q-12,-65 -6,-85 Q0,-75 0,-55 Z" fill="#06b6d4" filter="url(#glow)" />
-      <path d="M0,-44 Q0,-72 0,-92 Q3,-78 2,-58 Z" fill="#e0aaff" filter="url(#glow)" />
-      <path d="M4,-42 Q12,-65 6,-85 Q0,-75 0,-55 Z" fill="#06b6d4" filter="url(#glow)" />
-
-      {/* Eye */}
-      <circle cx="5" cy="-29" r="5" fill="#e0f2fe" />
-      <circle cx="6" cy="-29" r="2.5" fill="#0284c7" />
-      <circle cx="7" cy="-30" r="1" fill="white" />
-
-      {/* Beak */}
-      <path d="M8,-25 L18,-22 L10,-19 Z" fill="#fbbf24" />
-
-      {/* Spark particles */}
-      {[[-105,30], [105,30], [-90,-65], [90,-65], [-55,-75], [55,-75], [-35,60], [35,60], [-115,5], [115,5]].map(([x,y], i) => (
-        <circle key={i} cx={x} cy={y} r={i % 3 === 0 ? 3 : i % 2 === 0 ? 2 : 1.5} fill={i % 2 === 0 ? '#06b6d4' : '#c084fc'} filter="url(#glow)" opacity={0.7 + Math.random() * 0.3} />
-      ))}
-
-      {/* Circuit lines on wings */}
-      <polyline points="-35,0 -60,-10 -80,-8 -100,-20" fill="none" stroke="#06b6d4" strokeWidth="1" opacity="0.4" strokeDasharray="3,3" />
-      <polyline points="35,0 60,-10 80,-8 100,-20" fill="none" stroke="#06b6d4" strokeWidth="1" opacity="0.4" strokeDasharray="3,3" />
-    </svg>
+        {/* Footer bar */}
+        <rect x="0" y="370" width="520" height="30" rx="0" fill="rgba(124,58,237,0.08)"/>
+        <rect x="0" y="382" width="520" height="18" rx="18" fill="rgba(124,58,237,0.08)"/>
+        <circle cx="18" cy="385" r="3" fill="#22c55e"/>
+        <text x="26" y="385" fontFamily="monospace" fontSize="9" fill="rgba(255,255,255,0.35)" dominantBaseline="middle">All systems operational · Last sync 0.3s ago · 3 sites active</text>
+      </svg>
+    </div>
   )
 }
+
 
 function WaveDivider({ flip = false, from = '#030014', to = '#0d0428' }: { flip?: boolean; from?: string; to?: string }) {
   return (
@@ -301,12 +297,6 @@ export default function App() {
               <span style={{ fontSize: '55%', color: 'rgba(255,255,255,0.85)', fontWeight: 700, letterSpacing: 0 }}>Rise. Connect. Control.</span>
             </h1>
             <p style={{ fontSize: 18, color: 'rgba(255,255,255,0.6)', lineHeight: 1.7, marginBottom: 32, maxWidth: 480 }}>{heroTag}</p>
-
-            {/* Brand logo block */}
-            <div style={{ marginBottom: 32, padding: '20px 24px', background: 'rgba(124,58,237,0.07)', border: '1px solid rgba(124,58,237,0.2)', borderRadius: 16, display: 'inline-block' }}>
-              <GalvonLogo size="full" />
-            </div>
-
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
               <a href="#products" style={{ display: 'flex', alignItems: 'center', gap: 8, background: `linear-gradient(135deg, ${PURPLE}, ${CYAN})`, padding: '14px 28px', borderRadius: 12, fontWeight: 700, fontSize: 15, boxShadow: `0 0 30px rgba(124,58,237,0.4)`, color: 'white', textDecoration: 'none' }}>
                 Explore Suite <ArrowRight size={18} />
@@ -332,7 +322,7 @@ export default function App() {
             {/* Glow ring behind phoenix */}
             <div style={{ position: 'absolute', width: 380, height: 380, borderRadius: '50%', background: 'radial-gradient(circle, rgba(124,58,237,0.3) 0%, transparent 70%)', filter: 'blur(30px)' }} />
             <div style={{ position: 'relative', zIndex: 2, width: '100%', maxWidth: 480 }}>
-              <VoidPhoenix />
+              <GalvonDashboard />
             </div>
           </div>
         </div>
