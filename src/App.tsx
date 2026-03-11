@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import { Zap, Droplets, Factory, Activity, Shield, Globe, ArrowRight, Building2, Flame, FlaskConical, Waves, CheckCircle, Menu, X, Cpu, Network, Lock, BarChart2, Layers } from 'lucide-react'
+import { Zap, Droplets, Factory, Activity, Shield, Globe, ArrowRight, Building2, Flame, FlaskConical, Waves, CheckCircle, Menu, X, Cpu, Network, Lock, Layers, TrendingDown, AlertTriangle, DollarSign, Phone, Download, ChevronRight } from 'lucide-react'
 
-const VERSION = '1.0'
+const VERSION = '1.1'
 const BUILD_DATE = 'March 2026'
 const GEMINI_KEY = import.meta.env.VITE_GEMINI_API_KEY
 
@@ -14,177 +14,105 @@ async function fetchGeminiText(prompt: string, fallback: string): Promise<string
   } catch { return fallback }
 }
 
-// ── GALVON LOGO — Void Phoenix colour theme ──────────────────────────────────
-function GalvonLogo({ size = 'full' }: { size?: 'full' | 'compact' }) {
-  if (size === 'compact') {
-    return (
-      <svg viewBox="0 0 44 44" width="36" height="36" style={{ overflow: 'visible' }}>
-        <defs>
-          <linearGradient id="lgIcon" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#7c3aed" /><stop offset="100%" stopColor="#06b6d4" />
-          </linearGradient>
-          <filter id="lgGlow"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        </defs>
-        <polygon points="22,2 40,12 40,32 22,42 4,32 4,12" fill="rgba(124,58,237,0.15)" stroke="url(#lgIcon)" strokeWidth="1.5"/>
-        {/* circuit nodes */}
-        {[[22,2],[40,12],[40,32],[22,42],[4,32],[4,12]].map(([x,y],i)=>(
-          <circle key={i} cx={x} cy={y} r="2.5" fill="#06b6d4" filter="url(#lgGlow)"/>
-        ))}
-        {/* lightning bolt */}
-        <path d="M24 11 L18 22 L22 22 L20 33 L26 21 L22 21 Z" fill="url(#lgIcon)" filter="url(#lgGlow)"/>
-        <circle cx="22" cy="22" r="3.5" fill="#7c3aed" stroke="#06b6d4" strokeWidth="1"/>
-      </svg>
-    )
-  }
-  return (
-    <svg viewBox="0 0 600 220" width="100%" style={{ maxWidth: 560, display: 'block' }}>
-      <defs>
-        <linearGradient id="lgBolt" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#06b6d4"/><stop offset="100%" stopColor="#7c3aed"/>
-        </linearGradient>
-        <linearGradient id="lgLine" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#7c3aed"/><stop offset="100%" stopColor="#06b6d4"/>
-        </linearGradient>
-        <filter id="lgGlowF"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        <filter id="lgSoft"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-      </defs>
-
-      {/* Hexagon icon */}
-      <polygon points="75,8 135,42 135,108 75,142 15,108 15,42" fill="rgba(124,58,237,0.12)" stroke="#7c3aed" strokeWidth="1.5" opacity="0.8"/>
-      <polygon points="75,20 118,44 118,93 75,118 32,93 32,44" fill="rgba(6,182,212,0.07)" stroke="#06b6d4" strokeWidth="1" opacity="0.5"/>
-      {/* circuit nodes */}
-      {[[75,8],[135,42],[135,108],[75,142],[15,108],[15,42]].map(([x,y],i)=>(
-        <circle key={i} cx={x} cy={y} r="4" fill="#06b6d4" filter="url(#lgGlowF)" opacity="0.9"/>
-      ))}
-      {/* connecting lines */}
-      <polyline points="75,8 135,42 135,108 75,142 15,108 15,42 75,8" fill="none" stroke="#7c3aed" strokeWidth="1" opacity="0.4"/>
-      {/* lightning bolt */}
-      <path d="M84 38 L62 75 L76 75 L66 112 L90 73 L74 73 Z" fill="url(#lgBolt)" filter="url(#lgGlowF)"/>
-      <circle cx="75" cy="75" r="6" fill="#4c1d95" stroke="#06b6d4" strokeWidth="1.5"/>
-
-      {/* Wordmark GALVON */}
-      <text x="160" y="92" fontFamily="'Arial Black', Arial, sans-serif" fontWeight="900" fontSize="68" letterSpacing="12" fill="white" dominantBaseline="middle">GALVON</text>
-
-      {/* Tagline */}
-      <text x="163" y="132" fontFamily="Arial, sans-serif" fontWeight="400" fontSize="14" letterSpacing="5" fill="#06b6d4" dominantBaseline="middle">INDUSTRIAL INTELLIGENCE</text>
-
-      {/* Accent line */}
-      <rect x="163" y="147" width="390" height="1.5" rx="1" fill="url(#lgLine)" opacity="0.6"/>
-
-      {/* Product badges */}
-      <rect x="163" y="163" width="78" height="22" rx="11" fill="rgba(6,182,212,0.12)" stroke="#06b6d4" strokeWidth="1"/>
-      <text x="202" y="174" fontFamily="Arial, sans-serif" fontSize="10" fontWeight="700" fill="#67e8f9" textAnchor="middle" dominantBaseline="middle" letterSpacing="1">AMPRIS</text>
-
-      <rect x="250" y="163" width="92" height="22" rx="11" fill="rgba(56,189,248,0.1)" stroke="#38bdf8" strokeWidth="1"/>
-      <text x="296" y="174" fontFamily="Arial, sans-serif" fontSize="10" fontWeight="700" fill="#7dd3fc" textAnchor="middle" dominantBaseline="middle" letterSpacing="1">FLOWNEXUS</text>
-
-      <rect x="351" y="163" width="90" height="22" rx="11" fill="rgba(245,158,11,0.1)" stroke="#f59e0b" strokeWidth="1"/>
-      <text x="396" y="174" fontFamily="Arial, sans-serif" fontSize="10" fontWeight="700" fill="#fcd34d" textAnchor="middle" dominantBaseline="middle" letterSpacing="1">NEXAPROC</text>
-    </svg>
-  )
+// ── Colour tokens ─────────────────────────────────────────────────────────────
+const C = {
+  navy:   '#1B365D',
+  teal:   '#00B4D8',
+  orange: '#FF6B35',
+  steel:  '#4A5568',
+  light:  '#F7FAFC',
+  white:  '#FFFFFF',
+  dark:   '#1A202C',
+  green:  '#2E7D32',
 }
 
-function GalvonDashboard() {
-  const PURPLE = '#7c3aed'; const CYAN = '#06b6d4'
-  const nodes = [[80,200],[160,160],[240,200],[320,160],[400,200],[240,130]]
-  const edges = [[0,1],[1,2],[2,3],[3,4],[1,5],[3,5],[5,2]]
-  const barH = [68,52,80,44,72,60,88]
-  const lineY = [110,100,95,105,88,92,80,86,75,82,70]
+// ── Dashboard mockup ──────────────────────────────────────────────────────────
+function ControlCenterMockup() {
+  const bars = [55,72,48,80,63,88,70]
+  const line = [62,58,55,60,52,48,45,50,43,46,40]
   return (
-    <div style={{position:'relative',width:'100%',maxWidth:520}}>
-      {/* Glow backdrop */}
-      <div style={{position:'absolute',inset:0,borderRadius:20,background:'radial-gradient(ellipse at 60% 40%, rgba(124,58,237,0.25) 0%, transparent 70%)',filter:'blur(30px)',pointerEvents:'none'}}/>
-      <svg viewBox="0 0 520 400" style={{width:'100%',display:'block',filter:'drop-shadow(0 0 40px rgba(124,58,237,0.3))'}}>
-        {/* Panel bg */}
-        <rect x="0" y="0" width="520" height="400" rx="18" fill="rgba(8,3,32,0.95)" stroke="rgba(124,58,237,0.5)" strokeWidth="1.5"/>
-        {/* Header */}
-        <rect x="0" y="0" width="520" height="46" rx="18" fill="rgba(124,58,237,0.18)"/>
-        <rect x="0" y="30" width="520" height="16" fill="rgba(124,58,237,0.18)"/>
-        <circle cx="20" cy="23" r="5" fill="#ef4444" opacity="0.85"/>
-        <circle cx="36" cy="23" r="5" fill="#f59e0b" opacity="0.85"/>
-        <circle cx="52" cy="23" r="5" fill="#22c55e" opacity="0.85"/>
-        <text x="74" y="23" fontFamily="monospace" fontSize="12" fill="rgba(255,255,255,0.75)" dominantBaseline="middle">GALVON · Unified Control Center</text>
-        <circle cx="458" cy="23" r="4" fill="#22c55e"/>
-        <text x="468" y="23" fontFamily="monospace" fontSize="11" fill="#22c55e" dominantBaseline="middle">LIVE</text>
+    <div style={{ position: 'relative', width: '100%', maxWidth: 560 }}>
+      {/* Glow */}
+      <div style={{ position: 'absolute', inset: -20, borderRadius: 24, background: `radial-gradient(ellipse at 50% 40%, rgba(0,180,216,0.18) 0%, transparent 70%)`, filter: 'blur(20px)', pointerEvents: 'none' }} />
+      <svg viewBox="0 0 540 420" style={{ width: '100%', display: 'block', filter: 'drop-shadow(0 20px 60px rgba(27,54,93,0.35))' }}>
+        {/* Window chrome */}
+        <rect x="0" y="0" width="540" height="420" rx="14" fill="#0d1b2e" stroke="rgba(0,180,216,0.3)" strokeWidth="1.5"/>
+        <rect x="0" y="0" width="540" height="40" rx="14" fill="rgba(0,180,216,0.1)"/>
+        <rect x="0" y="26" width="540" height="14" fill="rgba(0,180,216,0.1)"/>
+        <circle cx="18" cy="20" r="5" fill="#ef4444" opacity="0.8"/>
+        <circle cx="34" cy="20" r="5" fill="#f59e0b" opacity="0.8"/>
+        <circle cx="50" cy="20" r="5" fill="#22c55e" opacity="0.8"/>
+        <text x="72" y="20" fontFamily="monospace" fontSize="12" fill="rgba(255,255,255,0.7)" dominantBaseline="middle">GALVON · Unified Control Center  v2.4.1</text>
+        <circle cx="504" cy="20" r="4" fill="#22c55e"/>
+        <text x="514" y="20" fontFamily="monospace" fontSize="10" fill="#22c55e" dominantBaseline="middle">LIVE</text>
 
-        {/* 3 Product status cards */}
+        {/* 3 vertical cards */}
         {[
-          {x:12, label:'AMPRIS', sub:'Power SCADA', val:'98.2%', unit:'Uptime', color:'#06b6d4', status:'ONLINE'},
-          {x:183, label:'FLOWNEXUS', sub:'Flow SCADA', val:'3.41 MW', unit:'Throughput', color:'#38bdf8', status:'ONLINE'},
-          {x:354, label:'NEXAPROC', sub:'Process SCADA', val:'847/hr', unit:'Output', color:'#f59e0b', status:'ACTIVE'},
+          { x:10, label:'AMPRIS', sub:'Power SCADA', val:'98.4', unit:'% Uptime', color:'#00B4D8', trend:'+0.2%' },
+          { x:192, label:'FLOWNEXUS', sub:'Flow SCADA', val:'3.41', unit:'MW Flow', color:'#38bdf8', trend:'Normal' },
+          { x:374, label:'NEXAPROC', sub:'Process SCADA', val:'94.2', unit:'% OEE', color:'#FF6B35', trend:'+3.1%' },
         ].map((c,i) => (
           <g key={i}>
-            <rect x={c.x} y="58" width="155" height="92" rx="10" fill="rgba(255,255,255,0.03)" stroke={c.color} strokeWidth="1" strokeOpacity="0.4"/>
-            <rect x={c.x} y="58" width="155" height="28" rx="10" fill={`${c.color}18`}/>
-            <rect x={c.x} y="72" width="155" height="14" fill={`${c.color}18`}/>
-            <circle cx={c.x+14} cy="72" r="4" fill={c.status === 'ONLINE' ? '#22c55e' : '#f59e0b'}/>
-            <text x={c.x+24} y="72" fontFamily="monospace" fontSize="10" fontWeight="bold" fill={c.color} dominantBaseline="middle" letterSpacing="1">{c.label}</text>
-            <text x={c.x+10} y="100" fontFamily="monospace" fontSize="20" fontWeight="900" fill="white" dominantBaseline="middle">{c.val}</text>
-            <text x={c.x+10} y="120" fontFamily="monospace" fontSize="10" fill="rgba(255,255,255,0.4)" dominantBaseline="middle">{c.unit}</text>
-            <rect x={c.x+95} y="112" width="50" height="16" rx="8" fill={`${c.color}20`} stroke={c.color} strokeWidth="0.8"/>
-            <text x={c.x+120} y="120" fontFamily="monospace" fontSize="9" fill={c.color} textAnchor="middle" dominantBaseline="middle">{c.status}</text>
+            <rect x={c.x} y="50" width="158" height="88" rx="10" fill="rgba(255,255,255,0.03)" stroke={`${c.color}60`} strokeWidth="1"/>
+            <rect x={c.x} y="50" width="158" height="28" rx="10" fill={`${c.color}18`}/>
+            <rect x={c.x} y="66" width="158" height="12" fill={`${c.color}18`}/>
+            <circle cx={c.x+12} cy="64" r="4" fill="#22c55e"/>
+            <text x={c.x+22} y="64" fontFamily="monospace" fontSize="10" fontWeight="bold" fill={c.color} dominantBaseline="middle" letterSpacing="1">{c.label}</text>
+            <text x={c.x+10} y="94" fontFamily="monospace" fontSize="22" fontWeight="900" fill="white" dominantBaseline="middle">{c.val}</text>
+            <text x={c.x+10} y="113" fontFamily="monospace" fontSize="10" fill="rgba(255,255,255,0.4)" dominantBaseline="middle">{c.unit}</text>
+            <rect x={c.x+100} y="106" width="50" height="16" rx="8" fill={`${c.color}20`} stroke={`${c.color}60`} strokeWidth="1"/>
+            <text x={c.x+125} y="114" fontFamily="monospace" fontSize="9" fill={c.color} textAnchor="middle" dominantBaseline="middle">{c.trend}</text>
           </g>
         ))}
 
-        {/* Section label */}
-        <text x="16" y="170" fontFamily="monospace" fontSize="10" fill="rgba(255,255,255,0.3)" letterSpacing="2">NETWORK TOPOLOGY</text>
-
-        {/* Network topology */}
-        {edges.map(([a,b],i) => (
-          <line key={i} x1={nodes[a][0]} y1={nodes[a][1]} x2={nodes[b][0]} y2={nodes[b][1]} stroke={CYAN} strokeWidth="1" strokeOpacity="0.35" strokeDasharray="4,3"/>
-        ))}
-        {nodes.map(([x,y],i) => (
+        {/* Alarm panel */}
+        <text x="14" y="155" fontFamily="monospace" fontSize="9" fill="rgba(255,255,255,0.3)" letterSpacing="2">ACTIVE ALARMS</text>
+        {[
+          { col:'#22c55e', txt:'All Ampris substations normal', time:'09:42' },
+          { col:'#f59e0b', txt:'FlowNexus: Pump P-204 high vibration', time:'09:38' },
+          { col:'#ef4444', txt:'NexaProc: Reactor temp threshold breach', time:'09:31' },
+        ].map((a,i) => (
           <g key={i}>
-            <circle cx={x} cy={y} r="10" fill="rgba(124,58,237,0.2)" stroke={i===5?CYAN:PURPLE} strokeWidth="1.5"/>
-            <circle cx={x} cy={y} r="4" fill={i===5?CYAN:PURPLE} opacity="0.9"/>
+            <rect x="12" y={166+i*22} width="516" height="18" rx="4" fill="rgba(255,255,255,0.015)" stroke={`${a.col}30`} strokeWidth="1"/>
+            <rect x="12" y={166+i*22} width="3" height="18" rx="1" fill={a.col}/>
+            <text x="22" y={175+i*22} fontFamily="monospace" fontSize="10" fill="rgba(255,255,255,0.65)" dominantBaseline="middle">{a.txt}</text>
+            <text x="490" y={175+i*22} fontFamily="monospace" fontSize="9" fill="rgba(255,255,255,0.3)" dominantBaseline="middle">{a.time}</text>
           </g>
         ))}
-        {/* Node labels */}
-        {[['Substation','A'],['Gateway','B'],['PLC','C'],['RTU','D'],['HMI','E'],['Master','']] .map(([l],i) => (
-          <text key={i} x={nodes[i][0]} y={nodes[i][1]+20} fontFamily="monospace" fontSize="8" fill="rgba(255,255,255,0.35)" textAnchor="middle">{l}</text>
-        ))}
 
-        {/* Divider */}
-        <line x1="12" y1="230" x2="508" y2="230" stroke="rgba(124,58,237,0.2)" strokeWidth="1"/>
+        {/* Separator */}
+        <line x1="12" y1="236" x2="528" y2="236" stroke="rgba(0,180,216,0.12)" strokeWidth="1"/>
 
-        {/* Bar chart left */}
-        <text x="16" y="244" fontFamily="monospace" fontSize="10" fill="rgba(255,255,255,0.3)" letterSpacing="2">LOAD BY SYSTEM</text>
-        {barH.map((h,i) => (
+        {/* Bar chart */}
+        <text x="14" y="250" fontFamily="monospace" fontSize="9" fill="rgba(255,255,255,0.3)" letterSpacing="2">SYSTEM LOAD — 7 DAY</text>
+        {bars.map((h,i) => (
           <g key={i}>
-            <rect x={16+i*32} y={330-h} width="22" height={h} rx="4" fill={i%2===0?PURPLE:CYAN} opacity="0.7"/>
-            <text x={16+i*32+11} y="340" fontFamily="monospace" fontSize="8" fill="rgba(255,255,255,0.3)" textAnchor="middle">W{i+1}</text>
+            <rect x={14+i*34} y={330-h} width="24" height={h} rx="3" fill={i===5?C.teal:C.orange} opacity="0.7"/>
+            <text x={14+i*34+12} y="340" fontFamily="monospace" fontSize="8" fill="rgba(255,255,255,0.25)" textAnchor="middle">D{i+1}</text>
           </g>
         ))}
 
-        {/* Line chart right */}
-        <text x="276" y="244" fontFamily="monospace" fontSize="10" fill="rgba(255,255,255,0.3)" letterSpacing="2">UPTIME TREND</text>
-        <polyline
-          points={lineY.map((y,i)=>`${276+i*22},${y+220}`).join(' ')}
-          fill="none" stroke={CYAN} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        {/* Area fill */}
-        <polyline
-          points={`276,350 ${lineY.map((y,i)=>`${276+i*22},${y+220}`).join(' ')} ${276+10*22},350`}
-          fill={`${CYAN}18`} stroke="none"/>
-        {lineY.map((y,i) => (
-          <circle key={i} cx={276+i*22} cy={y+220} r="2.5" fill={CYAN} opacity="0.8"/>
-        ))}
+        {/* Line chart */}
+        <text x="280" y="250" fontFamily="monospace" fontSize="9" fill="rgba(255,255,255,0.3)" letterSpacing="2">UPTIME TREND</text>
+        <polyline points={`280,350 ${line.map((y,i)=>`${280+i*24},${y+278}`).join(' ')} 520,350`} fill={`${C.teal}18`} stroke="none"/>
+        <polyline points={line.map((y,i)=>`${280+i*24},${y+278}`).join(' ')} fill="none" stroke={C.teal} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+        {line.map((y,i) => <circle key={i} cx={280+i*24} cy={y+278} r="2.5" fill={C.teal} opacity="0.8"/>)}
 
         {/* Footer bar */}
-        <rect x="0" y="370" width="520" height="30" rx="0" fill="rgba(124,58,237,0.08)"/>
-        <rect x="0" y="382" width="520" height="18" rx="18" fill="rgba(124,58,237,0.08)"/>
-        <circle cx="18" cy="385" r="3" fill="#22c55e"/>
-        <text x="26" y="385" fontFamily="monospace" fontSize="9" fill="rgba(255,255,255,0.35)" dominantBaseline="middle">All systems operational · Last sync 0.3s ago · 3 sites active</text>
+        <rect x="0" y="386" width="540" height="34" rx="0" fill="rgba(0,180,216,0.06)"/>
+        <rect x="0" y="400" width="540" height="20" rx="14" fill="rgba(0,180,216,0.06)"/>
+        <circle cx="18" cy="403" r="3" fill="#22c55e"/>
+        <text x="28" y="403" fontFamily="monospace" fontSize="9" fill="rgba(255,255,255,0.3)" dominantBaseline="middle">3 sites · 847 tags · Last sync 0.3s · All systems operational</text>
       </svg>
     </div>
   )
 }
 
-
-function WaveDivider({ flip = false, from = '#030014', to = '#0d0428' }: { flip?: boolean; from?: string; to?: string }) {
+function WaveDivider({ from, to, flip=false }: { from:string; to:string; flip?:boolean }) {
   return (
     <div style={{ background: to, lineHeight: 0 }} className={flip ? 'rotate-180' : ''}>
-      <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="100%" height="80">
-        <path d="M0,40 Q360,80 720,40 Q1080,0 1440,40 L1440,0 L0,0 Z" fill={from} />
+      <svg viewBox="0 0 1440 70" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="100%" height="70">
+        <path d="M0,35 Q360,70 720,35 Q1080,0 1440,35 L1440,0 L0,0 Z" fill={from}/>
       </svg>
     </div>
   )
@@ -192,272 +120,325 @@ function WaveDivider({ flip = false, from = '#030014', to = '#0d0428' }: { flip?
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [heroTag, setHeroTag] = useState('Rise above complexity. Command every industrial system.')
+  const [heroTag, setHeroTag] = useState('Industrial Intelligence That Never Sleeps')
 
   useEffect(() => {
-    fetchGeminiText('Write a dramatic 10-word tagline for GALVON, an Industrial Intelligence platform. Like a phoenix rising from void. Bold, powerful, no quotes.', 'Rise above complexity. Command every industrial system.').then(setHeroTag)
+    fetchGeminiText('Write a powerful 6-word industrial B2B headline for GALVON SCADA platform. No quotes. Examples: "Industrial Intelligence That Never Sleeps"', 'Industrial Intelligence That Never Sleeps').then(setHeroTag)
   }, [])
 
+  const navLinks = ['Platform', 'Ampris', 'FlowNexus', 'NexaProc', 'Industries', 'Resources']
+
   const products = [
-    { name: 'Ampris', sub: 'Power and Electrical', icon: Zap, color: '#06b6d4', glow: '0 0 30px rgba(6,182,212,0.4)', border: 'rgba(6,182,212,0.4)', desc: 'SCADA for substations, energy management, and power utilities.' },
-    { name: 'FlowNexus', sub: 'Flow and Liquid', icon: Droplets, color: '#38bdf8', glow: '0 0 30px rgba(56,189,248,0.4)', border: 'rgba(56,189,248,0.3)', desc: 'Pipelines, water treatment, and fluid process control systems.' },
-    { name: 'NexaProc', sub: 'Factory and Process', icon: Factory, color: '#f59e0b', glow: '0 0 30px rgba(245,158,11,0.4)', border: 'rgba(245,158,11,0.3)', desc: 'Manufacturing plants, batch control, and process automation.' },
+    { name:'Ampris', sub:'Power & Electrical SCADA', icon:Zap, color:C.teal, desc:'Real-time monitoring, fault detection, load balancing, and energy analytics for substations, grids, and power utilities.', useCase:'Monitor a 50MW solar farm with 99.9% accuracy and predictive fault alerts.' },
+    { name:'FlowNexus', sub:'Flow & Liquid SCADA', icon:Droplets, color:'#38bdf8', desc:'Pipeline monitoring, leak detection, pressure optimisation, and compliance reporting for water, wastewater, and fluid systems.', useCase:'Reduce non-revenue water losses by 30% across a 200km municipal network.' },
+    { name:'NexaProc', sub:'Factory & Process SCADA', icon:Factory, color:C.orange, desc:'Batch control, OEE tracking, recipe management, and quality monitoring for pharmaceutical, food, chemical, and manufacturing plants.', useCase:'Improve OEE from 62% to 78% in pharmaceutical manufacturing.' },
+  ]
+
+  const problems = [
+    { icon:TrendingDown, stat:'₹40L+/hr', label:'Lost production cost from unplanned downtime' },
+    { icon:AlertTriangle, stat:'67%', label:'Of industrial incidents caused by siloed legacy systems' },
+    { icon:DollarSign, stat:'3x', label:'Higher cost when scaling monitoring without a unified platform' },
   ]
 
   const features = [
-    { icon: Activity, title: 'Real-time SCADA', desc: 'Live telemetry from every sensor, PLC, and RTU across your entire operation.' },
-    { icon: Shield, title: 'Cybersecurity Built-in', desc: 'IEC 62443 compliant. Role-based access. End-to-end encryption.' },
-    { icon: Cpu, title: 'AI Predictive Engine', desc: 'Machine learning identifies equipment failure days before it happens.' },
-    { icon: Network, title: 'Multi-site Unified', desc: 'Manage 1 plant or 100 from a single command center dashboard.' },
-    { icon: Lock, title: 'Redundant Architecture', desc: '99.9% uptime with hot-standby failover and offline edge processing.' },
-    { icon: BarChart2, title: 'Advanced Analytics', desc: 'KPI dashboards, OEE tracking, energy reports, and executive summaries.' },
+    { icon:Activity, title:'Real-time SCADA', desc:'Sub-second data refresh from every PLC, RTU, and sensor across your operation.' },
+    { icon:Cpu, title:'Predictive Analytics', desc:'AI-powered anomaly detection and failure prediction — catch issues days in advance.' },
+    { icon:Shield, title:'IEC 62443 Compliant', desc:'End-to-end encryption, RBAC, audit trails, and full cybersecurity hardening.' },
+    { icon:Network, title:'OPC-UA / Modbus / MQTT', desc:'Connects natively to Siemens, Allen-Bradley, Schneider, and every major PLC brand.' },
+    { icon:Lock, title:'99.9% Uptime SLA', desc:'Hot-standby failover, edge processing, and 24/7 NOC monitoring included.' },
+    { icon:Globe, title:'Multi-site Unified', desc:'Single pane of glass across 1 plant or 100 — with per-site drill-down.' },
   ]
 
   const stats = [
-    { val: '3', label: 'SCADA Verticals' },
-    { val: '100+', label: 'Plants Deployed' },
-    { val: '99.9%', label: 'Uptime SLA' },
-    { val: '10K+', label: 'Tags Supported' },
+    { val:'35%', label:'Reduction in unplanned downtime' },
+    { val:'20%', label:'Improvement in energy efficiency' },
+    { val:'₹2.5 Cr', label:'Average annual savings per facility' },
+    { val:'500+', label:'Facilities running on GALVON' },
   ]
 
   const industries = [
-    { icon: Zap, label: 'Power Utilities' },
-    { icon: Flame, label: 'Oil and Gas' },
-    { icon: Waves, label: 'Water Treatment' },
-    { icon: Factory, label: 'Manufacturing' },
-    { icon: FlaskConical, label: 'Pharma' },
-    { icon: Building2, label: 'Food and Beverage' },
-    { icon: Globe, label: 'Smart Cities' },
-    { icon: Layers, label: 'Mining' },
+    { icon:Zap, label:'Power Utilities' }, { icon:Flame, label:'Oil and Gas' },
+    { icon:Waves, label:'Water Treatment' }, { icon:Factory, label:'Manufacturing' },
+    { icon:FlaskConical, label:'Pharmaceuticals' }, { icon:Building2, label:'Food and Beverage' },
+    { icon:Globe, label:'Smart Cities' }, { icon:Layers, label:'Mining and Metals' },
   ]
 
-  const process = [
-    { n: '01', title: 'Connect', desc: 'Plug into existing PLCs, RTUs, DCS, sensors via OPC-UA, Modbus, MQTT' },
-    { n: '02', title: 'Visualize', desc: 'Auto-generate live SCADA dashboards from your field device topology' },
-    { n: '03', title: 'Analyze', desc: 'AI engine processes historical and real-time data for insights and alerts' },
-    { n: '04', title: 'Optimize', desc: 'Close the loop — automate responses, reduce downtime, improve OEE' },
-  ]
-
-  const BG = '#030014'
-  const BG2 = '#0a0228'
-  const PURPLE = '#7c3aed'
-  const CYAN = '#06b6d4'
+  const integrations = ['Siemens S7', 'Allen Bradley', 'Schneider', 'OPC-UA', 'Modbus TCP/RTU', 'MQTT', 'DNP3', 'IEC 61850', 'SAP', 'REST API']
 
   return (
-    <div style={{ background: BG, color: 'white', fontFamily: "'Inter', system-ui, sans-serif" }} className="min-h-screen">
+    <div style={{ fontFamily:"'Inter', system-ui, sans-serif", background:C.white, color:C.dark }}>
 
       {/* NAV */}
-      <nav style={{ background: 'rgba(3,0,20,0.85)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(124,58,237,0.2)' }} className="fixed top-0 w-full z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <GalvonLogo size="compact" />
-            <span style={{ letterSpacing: '6px', fontWeight: 900, fontSize: 20 }}>GALVON</span>
+      <nav style={{ position:'fixed', top:0, width:'100%', zIndex:50, background:'rgba(255,255,255,0.97)', backdropFilter:'blur(16px)', borderBottom:`1px solid rgba(27,54,93,0.1)`, boxShadow:'0 1px 12px rgba(27,54,93,0.08)' }}>
+        <div style={{ maxWidth:1280, margin:'0 auto', padding:'0 24px', height:64, display:'flex', alignItems:'center', justifyContent:'space-between' }}>
+          <div style={{ display:'flex', alignItems:'center', gap:10 }}>
+            <div style={{ width:36, height:36, borderRadius:10, background:`linear-gradient(135deg, ${C.navy}, ${C.teal})`, display:'flex', alignItems:'center', justifyContent:'center', boxShadow:`0 4px 12px rgba(0,180,216,0.3)` }}>
+              <Zap size={18} color="white"/>
+            </div>
+            <span style={{ fontWeight:900, fontSize:20, letterSpacing:5, color:C.navy }}>GALVON</span>
           </div>
-          <div className="hidden md:flex items-center gap-8" style={{ fontSize: 14, color: 'rgba(255,255,255,0.7)' }}>
-            {['Products', 'Features', 'Industries', 'Process'].map(l => (
-              <a key={l} href={`#${l.toLowerCase()}`} style={{ transition: 'color .2s' }} onMouseOver={e => (e.currentTarget.style.color = CYAN)} onMouseOut={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.7)')}>{l}</a>
-            ))}
-            <a href="#contact" style={{ background: `linear-gradient(135deg, ${PURPLE}, ${CYAN})`, padding: '8px 20px', borderRadius: 10, fontWeight: 700, color: 'white', boxShadow: `0 0 20px rgba(124,58,237,0.4)` }}>Request Demo</a>
+          <div className="hidden md:flex" style={{ gap:28, fontSize:14, color:C.steel, alignItems:'center' }}>
+            {navLinks.map(l => <a key={l} href={`#${l.toLowerCase()}`} style={{ textDecoration:'none', color:C.steel, transition:'color .2s' }} onMouseOver={e=>(e.currentTarget.style.color=C.teal)} onMouseOut={e=>(e.currentTarget.style.color=C.steel)}>{l}</a>)}
+            <a href="#contact" style={{ background:C.orange, color:'white', padding:'9px 22px', borderRadius:8, fontWeight:700, textDecoration:'none', boxShadow:`0 4px 14px rgba(255,107,53,0.35)` }}>Request Demo</a>
           </div>
-          <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X size={22} /> : <Menu size={22} />}</button>
+          <button className="md:hidden" style={{ color:C.navy, background:'none', border:'none', cursor:'pointer' }} onClick={()=>setMenuOpen(!menuOpen)}>{menuOpen?<X size={22}/>:<Menu size={22}/>}</button>
         </div>
         {menuOpen && (
-          <div style={{ borderTop: '1px solid rgba(124,58,237,0.2)', background: 'rgba(3,0,20,0.95)' }} className="md:hidden px-6 py-4 flex flex-col gap-4">
-            {['Products', 'Features', 'Industries', 'Process', 'Contact'].map(l => (
-              <a key={l} href={`#${l.toLowerCase()}`} onClick={() => setMenuOpen(false)} style={{ color: 'rgba(255,255,255,0.7)', fontSize: 15 }}>{l}</a>
-            ))}
+          <div style={{ borderTop:`1px solid rgba(27,54,93,0.1)`, padding:'16px 24px', display:'flex', flexDirection:'column', gap:16 }}>
+            {navLinks.map(l => <a key={l} href={`#${l.toLowerCase()}`} onClick={()=>setMenuOpen(false)} style={{ textDecoration:'none', color:C.steel, fontSize:15 }}>{l}</a>)}
+            <a href="#contact" style={{ background:C.orange, color:'white', padding:'10px 20px', borderRadius:8, fontWeight:700, textDecoration:'none', textAlign:'center' }} onClick={()=>setMenuOpen(false)}>Request Demo</a>
           </div>
         )}
       </nav>
 
       {/* HERO */}
-      <section style={{ minHeight: '100vh', position: 'relative', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
-        {/* Background orbs */}
-        <div style={{ position: 'absolute', top: '10%', left: '5%', width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle, rgba(124,58,237,0.25) 0%, transparent 70%)', filter: 'blur(40px)', pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', top: '20%', right: '5%', width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(6,182,212,0.2) 0%, transparent 70%)', filter: 'blur(40px)', pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', bottom: '10%', left: '30%', width: 300, height: 300, borderRadius: '50%', background: 'radial-gradient(circle, rgba(168,85,247,0.15) 0%, transparent 70%)', filter: 'blur(50px)', pointerEvents: 'none' }} />
+      <section style={{ minHeight:'100vh', background:`linear-gradient(160deg, #0d1b2e 0%, #1B365D 50%, #0a2540 100%)`, display:'flex', alignItems:'center', paddingTop:80, position:'relative', overflow:'hidden' }}>
+        {/* Grid overlay */}
+        <div style={{ position:'absolute', inset:0, backgroundImage:`linear-gradient(rgba(0,180,216,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,180,216,0.04) 1px, transparent 1px)`, backgroundSize:'64px 64px', pointerEvents:'none' }}/>
+        {/* Orbs */}
+        <div style={{ position:'absolute', top:'15%', right:'8%', width:400, height:400, borderRadius:'50%', background:`radial-gradient(circle, rgba(0,180,216,0.15) 0%, transparent 70%)`, filter:'blur(50px)', pointerEvents:'none' }}/>
+        <div style={{ position:'absolute', bottom:'10%', left:'5%', width:300, height:300, borderRadius:'50%', background:`radial-gradient(circle, rgba(255,107,53,0.1) 0%, transparent 70%)`, filter:'blur(40px)', pointerEvents:'none' }}/>
 
-        {/* Star particles */}
-        {[...Array(30)].map((_, i) => (
-          <div key={i} style={{ position: 'absolute', left: `${(i * 37 + 13) % 100}%`, top: `${(i * 53 + 7) % 100}%`, width: i % 4 === 0 ? 3 : i % 3 === 0 ? 2 : 1, height: i % 4 === 0 ? 3 : i % 3 === 0 ? 2 : 1, borderRadius: '50%', background: i % 2 === 0 ? CYAN : '#c084fc', opacity: 0.3 + (i % 5) * 0.1, pointerEvents: 'none' }} />
-        ))}
-
-        {/* Grid lines */}
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: `linear-gradient(rgba(124,58,237,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(124,58,237,0.05) 1px, transparent 1px)`, backgroundSize: '60px 60px', pointerEvents: 'none' }} />
-
-        <div className="max-w-7xl mx-auto px-6 w-full pt-24 pb-16" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, alignItems: 'center' }}>
-          {/* Left text */}
+        <div style={{ maxWidth:1280, margin:'0 auto', padding:'48px 24px', width:'100%', display:'grid', gridTemplateColumns:'1fr 1fr', gap:64, alignItems:'center' }}>
+          {/* Left */}
           <div>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(124,58,237,0.15)', border: '1px solid rgba(124,58,237,0.4)', borderRadius: 100, padding: '6px 16px', fontSize: 13, color: '#c084fc', marginBottom: 28, fontWeight: 600 }}>
-              <Zap size={13} /> Industrial Intelligence Platform
+            <div style={{ display:'inline-flex', alignItems:'center', gap:8, background:'rgba(0,180,216,0.12)', border:'1px solid rgba(0,180,216,0.35)', borderRadius:100, padding:'6px 16px', fontSize:13, color:C.teal, marginBottom:28, fontWeight:600 }}>
+              <Activity size={13}/> Industrial SCADA Platform
             </div>
-            <h1 style={{ fontSize: 'clamp(48px, 6vw, 80px)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-1px', marginBottom: 24 }}>
-              <span>GAL</span><span style={{ background: `linear-gradient(135deg, ${PURPLE}, ${CYAN})`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>VON</span>
-              <br />
-              <span style={{ fontSize: '55%', color: 'rgba(255,255,255,0.85)', fontWeight: 700, letterSpacing: 0 }}>Rise. Connect. Control.</span>
+            <h1 style={{ fontSize:'clamp(36px,5vw,64px)', fontWeight:900, lineHeight:1.05, color:'white', marginBottom:20, letterSpacing:'-1px' }}>
+              {heroTag}
             </h1>
-            <p style={{ fontSize: 18, color: 'rgba(255,255,255,0.6)', lineHeight: 1.7, marginBottom: 32, maxWidth: 480 }}>{heroTag}</p>
-            <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-              <a href="#products" style={{ display: 'flex', alignItems: 'center', gap: 8, background: `linear-gradient(135deg, ${PURPLE}, ${CYAN})`, padding: '14px 28px', borderRadius: 12, fontWeight: 700, fontSize: 15, boxShadow: `0 0 30px rgba(124,58,237,0.4)`, color: 'white', textDecoration: 'none' }}>
-                Explore Suite <ArrowRight size={18} />
-              </a>
-              <a href="#contact" style={{ display: 'flex', alignItems: 'center', gap: 8, border: '1px solid rgba(124,58,237,0.4)', padding: '14px 28px', borderRadius: 12, fontWeight: 600, fontSize: 15, color: 'rgba(255,255,255,0.8)', textDecoration: 'none' }}>
-                Request Demo
-              </a>
-            </div>
+            <p style={{ fontSize:18, color:'rgba(255,255,255,0.65)', lineHeight:1.75, marginBottom:12, maxWidth:480 }}>
+              GALVON's unified SCADA platform monitors, controls, and optimises your critical industrial operations across power, flow, and process systems — 24/7/365.
+            </p>
 
-            {/* Mini stats */}
-            <div style={{ display: 'flex', gap: 32, marginTop: 48 }}>
-              {stats.slice(0, 3).map(s => (
-                <div key={s.label}>
-                  <div style={{ fontSize: 28, fontWeight: 900, background: `linear-gradient(135deg, ${CYAN}, #c084fc)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{s.val}</div>
-                  <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', marginTop: 2 }}>{s.label}</div>
-                </div>
+            {/* Trust micro-bar */}
+            <div style={{ display:'flex', gap:20, flexWrap:'wrap', marginBottom:36, fontSize:13, color:'rgba(255,255,255,0.5)' }}>
+              {['500+ Facilities', '99.9% Uptime', '30+ Countries', 'IEC 62443 Certified'].map(t => (
+                <span key={t} style={{ display:'flex', alignItems:'center', gap:5 }}><CheckCircle size={13} style={{ color:C.teal }}/>{t}</span>
               ))}
             </div>
-          </div>
 
-          {/* Right phoenix */}
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
-            {/* Glow ring behind phoenix */}
-            <div style={{ position: 'absolute', width: 380, height: 380, borderRadius: '50%', background: 'radial-gradient(circle, rgba(124,58,237,0.3) 0%, transparent 70%)', filter: 'blur(30px)' }} />
-            <div style={{ position: 'relative', zIndex: 2, width: '100%', maxWidth: 480 }}>
-              <GalvonDashboard />
+            <div style={{ display:'flex', gap:14, flexWrap:'wrap' }}>
+              <a href="#contact" style={{ display:'flex', alignItems:'center', gap:8, background:C.orange, color:'white', padding:'14px 28px', borderRadius:10, fontWeight:700, fontSize:15, textDecoration:'none', boxShadow:`0 6px 24px rgba(255,107,53,0.4)` }}>
+                Schedule Live Demo <ArrowRight size={18}/>
+              </a>
+              <a href="#platform" style={{ display:'flex', alignItems:'center', gap:8, border:'1px solid rgba(255,255,255,0.25)', color:'rgba(255,255,255,0.85)', padding:'14px 24px', borderRadius:10, fontWeight:600, fontSize:15, textDecoration:'none' }}>
+                <Download size={16}/> Technical Overview
+              </a>
+            </div>
+
+            {/* WhatsApp CTA — India-specific */}
+            <div style={{ marginTop:20, fontSize:13, color:'rgba(255,255,255,0.45)' }}>
+              <Phone size={13} style={{ display:'inline', marginRight:6, color:C.teal }}/>
+              Call or WhatsApp: <a href="https://wa.me/919373111709" style={{ color:C.teal, textDecoration:'none' }}>+91 93731 11709</a>
             </div>
           </div>
+
+          {/* Right — dashboard */}
+          <div style={{ display:'flex', justifyContent:'center' }}>
+            <ControlCenterMockup/>
+          </div>
         </div>
       </section>
 
-      <WaveDivider from={BG} to={BG2} />
-
-      {/* PRODUCTS */}
-      <section id="products" style={{ background: BG2, padding: '80px 0' }}>
-        <div className="max-w-7xl mx-auto px-6">
-          <div style={{ textAlign: 'center', marginBottom: 60 }}>
-            <div style={{ display: 'inline-block', background: 'rgba(6,182,212,0.1)', border: '1px solid rgba(6,182,212,0.3)', borderRadius: 100, padding: '5px 18px', fontSize: 12, color: CYAN, fontWeight: 700, letterSpacing: 3, marginBottom: 16 }}>THE SUITE</div>
-            <h2 style={{ fontSize: 'clamp(32px, 4vw, 52px)', fontWeight: 900 }}>Three Platforms. One Ecosystem.</h2>
-            <p style={{ color: 'rgba(255,255,255,0.5)', marginTop: 12, fontSize: 17 }}>Specialized SCADA for every industrial vertical, unified under Galvon.</p>
+      {/* LOGO / CLIENT BAR */}
+      <section style={{ background:C.light, padding:'28px 24px', borderBottom:`1px solid rgba(27,54,93,0.08)` }}>
+        <div style={{ maxWidth:1280, margin:'0 auto', textAlign:'center' }}>
+          <p style={{ fontSize:12, letterSpacing:3, color:C.steel, marginBottom:20, opacity:0.6 }}>TRUSTED BY INDIA'S LEADING INDUSTRIAL ORGANISATIONS</p>
+          <div style={{ display:'flex', flexWrap:'wrap', justifyContent:'center', gap:'16px 40px' }}>
+            {['Tata Power', 'L&T Hydrocarbon', 'NTPC', 'GAIL', 'Reliance Industries', 'BHEL'].map(n => (
+              <span key={n} style={{ fontSize:14, fontWeight:700, color:'rgba(27,54,93,0.35)', letterSpacing:1 }}>{n}</span>
+            ))}
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24 }}>
-            {products.map(p => (
-              <div key={p.name} style={{ background: 'rgba(255,255,255,0.03)', border: `1px solid ${p.border}`, borderRadius: 20, padding: 32, backdropFilter: 'blur(10px)', boxShadow: p.glow, transition: 'transform .3s', cursor: 'pointer' }}
-                onMouseOver={e => (e.currentTarget.style.transform = 'translateY(-6px)')}
-                onMouseOut={e => (e.currentTarget.style.transform = 'translateY(0)')}>
-                <div style={{ width: 56, height: 56, borderRadius: 16, background: `${p.color}20`, border: `1px solid ${p.color}40`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
-                  <p.icon size={26} style={{ color: p.color }} />
+        </div>
+      </section>
+
+      <WaveDivider from={C.light} to={C.white}/>
+
+      {/* PROBLEM */}
+      <section style={{ background:C.white, padding:'80px 24px' }}>
+        <div style={{ maxWidth:1280, margin:'0 auto' }}>
+          <div style={{ textAlign:'center', marginBottom:56 }}>
+            <div style={{ display:'inline-block', background:`${C.teal}15`, border:`1px solid ${C.teal}40`, borderRadius:100, padding:'5px 18px', fontSize:12, color:C.teal, fontWeight:700, letterSpacing:3, marginBottom:16 }}>THE PROBLEM</div>
+            <h2 style={{ fontSize:'clamp(28px,4vw,44px)', fontWeight:900, color:C.dark, marginBottom:14 }}>Industrial Operations Can't Afford Blind Spots</h2>
+            <p style={{ color:C.steel, maxWidth:560, margin:'0 auto', fontSize:17, lineHeight:1.7 }}>Legacy monitoring systems create dangerous gaps. GALVON was built to close them.</p>
+          </div>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(280px, 1fr))', gap:24 }}>
+            {problems.map(p => (
+              <div key={p.label} style={{ background:C.light, borderRadius:16, padding:'32px 28px', border:`1px solid rgba(27,54,93,0.08)`, display:'flex', flexDirection:'column', gap:12 }}>
+                <div style={{ width:52, height:52, borderRadius:14, background:`${C.orange}15`, display:'flex', alignItems:'center', justifyContent:'center' }}>
+                  <p.icon size={24} style={{ color:C.orange }}/>
                 </div>
-                <div style={{ fontSize: 11, color: p.color, fontWeight: 700, letterSpacing: 3, marginBottom: 6 }}>{p.sub.toUpperCase()}</div>
-                <h3 style={{ fontSize: 26, fontWeight: 900, marginBottom: 12 }}>{p.name}</h3>
-                <p style={{ color: 'rgba(255,255,255,0.55)', lineHeight: 1.6, marginBottom: 20 }}>{p.desc}</p>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: p.color, fontSize: 14, fontWeight: 600 }}>Learn more <ArrowRight size={15} /></div>
+                <div style={{ fontSize:40, fontWeight:900, color:C.navy }}>{p.stat}</div>
+                <p style={{ color:C.steel, fontSize:15, lineHeight:1.6 }}>{p.label}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <WaveDivider from={BG2} to={BG} flip />
+      <WaveDivider from={C.white} to={C.light}/>
+
+      {/* PLATFORM OVERVIEW — 3 verticals */}
+      <section id="platform" style={{ background:C.light, padding:'80px 24px' }}>
+        <div style={{ maxWidth:1280, margin:'0 auto' }}>
+          <div style={{ textAlign:'center', marginBottom:56 }}>
+            <div style={{ display:'inline-block', background:`${C.navy}10`, border:`1px solid ${C.navy}25`, borderRadius:100, padding:'5px 18px', fontSize:12, color:C.navy, fontWeight:700, letterSpacing:3, marginBottom:16 }}>THE SUITE</div>
+            <h2 style={{ fontSize:'clamp(28px,4vw,44px)', fontWeight:900, color:C.dark, marginBottom:14 }}>One Platform. Three Specialised Solutions.</h2>
+            <p style={{ color:C.steel, maxWidth:560, margin:'0 auto', fontSize:17 }}>Complete industrial control — power, flow, and process — unified under one ecosystem.</p>
+          </div>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(300px,1fr))', gap:24 }}>
+            {products.map(p => (
+              <div key={p.name} style={{ background:C.white, borderRadius:20, padding:'32px', border:`1px solid rgba(27,54,93,0.08)`, boxShadow:'0 2px 16px rgba(27,54,93,0.06)', transition:'all .3s' }}
+                onMouseOver={e=>{e.currentTarget.style.borderColor=p.color;e.currentTarget.style.boxShadow=`0 8px 32px rgba(27,54,93,0.12)`;e.currentTarget.style.transform='translateY(-4px)'}}
+                onMouseOut={e=>{e.currentTarget.style.borderColor='rgba(27,54,93,0.08)';e.currentTarget.style.boxShadow='0 2px 16px rgba(27,54,93,0.06)';e.currentTarget.style.transform='translateY(0)'}}>
+                <div style={{ width:56, height:56, borderRadius:16, background:`${p.color}15`, display:'flex', alignItems:'center', justifyContent:'center', marginBottom:20 }}>
+                  <p.icon size={26} style={{ color:p.color }}/>
+                </div>
+                <div style={{ fontSize:11, color:p.color, fontWeight:700, letterSpacing:3, marginBottom:6 }}>{p.sub.toUpperCase()}</div>
+                <h3 style={{ fontSize:24, fontWeight:900, color:C.dark, marginBottom:12 }}>{p.name}</h3>
+                <p style={{ color:C.steel, lineHeight:1.65, marginBottom:16, fontSize:15 }}>{p.desc}</p>
+                <div style={{ background:C.light, borderRadius:10, padding:'12px 16px', marginBottom:20 }}>
+                  <div style={{ fontSize:11, color:p.color, fontWeight:700, marginBottom:4 }}>USE CASE</div>
+                  <p style={{ color:C.steel, fontSize:13, lineHeight:1.5 }}>{p.useCase}</p>
+                </div>
+                <a href={`#${p.name.toLowerCase()}`} style={{ display:'flex', alignItems:'center', gap:6, color:p.color, fontSize:14, fontWeight:700, textDecoration:'none' }}>
+                  Explore {p.name} <ChevronRight size={16}/>
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <WaveDivider from={C.light} to={C.white}/>
+
+      {/* ROI STATS */}
+      <section style={{ background:C.white, padding:'80px 24px' }}>
+        <div style={{ maxWidth:1280, margin:'0 auto', display:'grid', gridTemplateColumns:'1fr 1fr', gap:64, alignItems:'center' }}>
+          <div>
+            <div style={{ display:'inline-block', background:`${C.orange}12`, border:`1px solid ${C.orange}35`, borderRadius:100, padding:'5px 18px', fontSize:12, color:C.orange, fontWeight:700, letterSpacing:3, marginBottom:16 }}>PROVEN ROI</div>
+            <h2 style={{ fontSize:'clamp(28px,4vw,44px)', fontWeight:900, color:C.dark, marginBottom:16 }}>The GALVON Impact — By the Numbers</h2>
+            <p style={{ color:C.steel, fontSize:16, lineHeight:1.75, marginBottom:28 }}>Every rupee invested in GALVON delivers measurable return through reduced downtime, lower energy costs, and operational efficiency gains.</p>
+            <a href="#contact" style={{ display:'inline-flex', alignItems:'center', gap:8, background:C.navy, color:'white', padding:'13px 26px', borderRadius:10, fontWeight:700, fontSize:15, textDecoration:'none' }}>
+              Calculate Your ROI <ArrowRight size={17}/>
+            </a>
+          </div>
+          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:16 }}>
+            {stats.map((s,i) => (
+              <div key={s.label} style={{ background:i%2===0?C.navy:`${C.teal}12`, borderRadius:16, padding:'28px 24px', border:`1px solid ${i%2===0?'transparent':`${C.teal}30`}` }}>
+                <div style={{ fontSize:36, fontWeight:900, color:i%2===0?C.teal:C.navy, marginBottom:8 }}>{s.val}</div>
+                <p style={{ color:i%2===0?'rgba(255,255,255,0.7)':C.steel, fontSize:14, lineHeight:1.5 }}>{s.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <WaveDivider from={C.white} to={C.light}/>
 
       {/* FEATURES */}
-      <section id="features" style={{ background: BG, padding: '80px 0' }}>
-        <div className="max-w-7xl mx-auto px-6">
-          <div style={{ textAlign: 'center', marginBottom: 60 }}>
-            <div style={{ display: 'inline-block', background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.3)', borderRadius: 100, padding: '5px 18px', fontSize: 12, color: '#c084fc', fontWeight: 700, letterSpacing: 3, marginBottom: 16 }}>PLATFORM CAPABILITIES</div>
-            <h2 style={{ fontSize: 'clamp(30px, 4vw, 48px)', fontWeight: 900 }}>Built for industrial-grade operations</h2>
+      <section id="features" style={{ background:C.light, padding:'80px 24px' }}>
+        <div style={{ maxWidth:1280, margin:'0 auto' }}>
+          <div style={{ textAlign:'center', marginBottom:56 }}>
+            <h2 style={{ fontSize:'clamp(28px,4vw,44px)', fontWeight:900, color:C.dark, marginBottom:12 }}>Built for Industrial-Grade Performance</h2>
+            <p style={{ color:C.steel, maxWidth:520, margin:'0 auto', fontSize:16 }}>Every feature engineered for environments where failure has real consequences.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 20 }}>
-            {features.map((f, i) => (
-              <div key={f.title} style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(124,58,237,0.15)', borderRadius: 16, padding: 28, transition: 'border-color .3s, background .3s' }}
-                onMouseOver={e => { e.currentTarget.style.borderColor = 'rgba(124,58,237,0.5)'; e.currentTarget.style.background = 'rgba(124,58,237,0.06)' }}
-                onMouseOut={e => { e.currentTarget.style.borderColor = 'rgba(124,58,237,0.15)'; e.currentTarget.style.background = 'rgba(255,255,255,0.02)' }}>
-                <div style={{ width: 48, height: 48, borderRadius: 12, background: i % 2 === 0 ? 'rgba(124,58,237,0.15)' : 'rgba(6,182,212,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
-                  <f.icon size={22} style={{ color: i % 2 === 0 ? '#c084fc' : CYAN }} />
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(260px,1fr))', gap:20 }}>
+            {features.map((f,i) => (
+              <div key={f.title} style={{ background:C.white, borderRadius:16, padding:'28px', border:`1px solid rgba(27,54,93,0.07)`, transition:'all .25s' }}
+                onMouseOver={e=>{e.currentTarget.style.borderColor=C.teal;e.currentTarget.style.boxShadow=`0 4px 20px rgba(0,180,216,0.12)`;e.currentTarget.style.transform='translateY(-3px)'}}
+                onMouseOut={e=>{e.currentTarget.style.borderColor='rgba(27,54,93,0.07)';e.currentTarget.style.boxShadow='none';e.currentTarget.style.transform='translateY(0)'}}>
+                <div style={{ width:48, height:48, borderRadius:12, background:i%2===0?`${C.teal}12`:`${C.navy}08`, display:'flex', alignItems:'center', justifyContent:'center', marginBottom:16 }}>
+                  <f.icon size={22} style={{ color:i%2===0?C.teal:C.navy }}/>
                 </div>
-                <h3 style={{ fontWeight: 700, fontSize: 17, marginBottom: 8 }}>{f.title}</h3>
-                <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 14, lineHeight: 1.6 }}>{f.desc}</p>
+                <h3 style={{ fontWeight:700, fontSize:16, color:C.dark, marginBottom:8 }}>{f.title}</h3>
+                <p style={{ color:C.steel, fontSize:14, lineHeight:1.65 }}>{f.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <WaveDivider from={BG} to={BG2} />
-
-      {/* HOW IT WORKS */}
-      <section id="process" style={{ background: BG2, padding: '80px 0' }}>
-        <div className="max-w-6xl mx-auto px-6">
-          <div style={{ textAlign: 'center', marginBottom: 60 }}>
-            <div style={{ display: 'inline-block', background: 'rgba(6,182,212,0.08)', border: '1px solid rgba(6,182,212,0.3)', borderRadius: 100, padding: '5px 18px', fontSize: 12, color: CYAN, fontWeight: 700, letterSpacing: 3, marginBottom: 16 }}>HOW IT WORKS</div>
-            <h2 style={{ fontSize: 'clamp(30px, 4vw, 48px)', fontWeight: 900 }}>From zero to full control in 4 steps</h2>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 0, position: 'relative' }}>
-            {/* Connector line */}
-            <div style={{ position: 'absolute', top: 36, left: '12.5%', right: '12.5%', height: 2, background: `linear-gradient(90deg, ${PURPLE}, ${CYAN})`, opacity: 0.3, zIndex: 0 }} className="hidden md:block" />
-            {process.map((p, i) => (
-              <div key={p.n} style={{ textAlign: 'center', padding: '0 16px', position: 'relative', zIndex: 1 }}>
-                <div style={{ width: 72, height: 72, borderRadius: '50%', background: `linear-gradient(135deg, rgba(124,58,237,0.3), rgba(6,182,212,0.3))`, border: `2px solid ${i % 2 === 0 ? PURPLE : CYAN}`, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px', fontSize: 18, fontWeight: 900, color: i % 2 === 0 ? '#c084fc' : CYAN, boxShadow: `0 0 20px ${i % 2 === 0 ? 'rgba(124,58,237,0.3)' : 'rgba(6,182,212,0.3)'}` }}>
-                  {p.n}
-                </div>
-                <h3 style={{ fontWeight: 800, fontSize: 18, marginBottom: 10 }}>{p.title}</h3>
-                <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 14, lineHeight: 1.6 }}>{p.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <WaveDivider from={BG2} to={BG} flip />
+      <WaveDivider from={C.light} to={C.white}/>
 
       {/* INDUSTRIES */}
-      <section id="industries" style={{ background: BG, padding: '80px 0' }}>
-        <div className="max-w-7xl mx-auto px-6">
-          <div style={{ textAlign: 'center', marginBottom: 50 }}>
-            <h2 style={{ fontSize: 'clamp(30px, 4vw, 48px)', fontWeight: 900, marginBottom: 12 }}>Industries We Power</h2>
-            <p style={{ color: 'rgba(255,255,255,0.5)' }}>Galvon adapts to every industrial environment on the planet.</p>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 16 }}>
-            {industries.map((ind, i) => (
-              <div key={ind.label} style={{ border: '1px solid rgba(124,58,237,0.2)', borderRadius: 16, padding: '24px 16px', textAlign: 'center', background: 'rgba(255,255,255,0.02)', transition: 'all .3s', cursor: 'default' }}
-                onMouseOver={e => { e.currentTarget.style.borderColor = CYAN; e.currentTarget.style.background = 'rgba(6,182,212,0.07)'; e.currentTarget.style.transform = 'scale(1.04)' }}
-                onMouseOut={e => { e.currentTarget.style.borderColor = 'rgba(124,58,237,0.2)'; e.currentTarget.style.background = 'rgba(255,255,255,0.02)'; e.currentTarget.style.transform = 'scale(1)' }}>
-                <ind.icon size={30} style={{ color: i % 2 === 0 ? CYAN : '#c084fc', marginBottom: 10 }} />
-                <div style={{ fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.75)' }}>{ind.label}</div>
+      <section id="industries" style={{ background:C.white, padding:'80px 24px' }}>
+        <div style={{ maxWidth:1280, margin:'0 auto', textAlign:'center' }}>
+          <h2 style={{ fontSize:'clamp(28px,4vw,44px)', fontWeight:900, color:C.dark, marginBottom:12 }}>Industries We Power</h2>
+          <p style={{ color:C.steel, marginBottom:48, fontSize:16 }}>GALVON adapts to every industrial vertical — from megawatt power plants to litre-per-hour pharma lines.</p>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(140px,1fr))', gap:16 }}>
+            {industries.map((ind,i) => (
+              <div key={ind.label} style={{ border:`1px solid rgba(27,54,93,0.1)`, borderRadius:14, padding:'24px 12px', transition:'all .25s', cursor:'default' }}
+                onMouseOver={e=>{e.currentTarget.style.borderColor=C.teal;e.currentTarget.style.background=`${C.teal}06`;e.currentTarget.style.transform='scale(1.04)'}}
+                onMouseOut={e=>{e.currentTarget.style.borderColor='rgba(27,54,93,0.1)';e.currentTarget.style.background='transparent';e.currentTarget.style.transform='scale(1)'}}>
+                <ind.icon size={28} style={{ color:i%2===0?C.teal:C.navy, marginBottom:10 }}/>
+                <div style={{ fontSize:13, fontWeight:600, color:C.dark }}>{ind.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <WaveDivider from={BG} to='#0d0428' />
+      <WaveDivider from={C.white} to={C.light}/>
+
+      {/* INTEGRATIONS */}
+      <section id="integrations" style={{ background:C.light, padding:'80px 24px' }}>
+        <div style={{ maxWidth:900, margin:'0 auto', textAlign:'center' }}>
+          <h2 style={{ fontSize:'clamp(26px,4vw,40px)', fontWeight:900, color:C.dark, marginBottom:12 }}>Seamless Integration with Your Existing Systems</h2>
+          <p style={{ color:C.steel, marginBottom:44, fontSize:16 }}>No rip-and-replace. GALVON connects to everything you already have.</p>
+          <div style={{ display:'flex', flexWrap:'wrap', justifyContent:'center', gap:12 }}>
+            {integrations.map(n => (
+              <div key={n} style={{ background:C.white, border:`1px solid rgba(27,54,93,0.12)`, borderRadius:10, padding:'10px 22px', color:C.steel, fontWeight:600, fontSize:14, transition:'all .2s' }}
+                onMouseOver={e=>{e.currentTarget.style.borderColor=C.teal;e.currentTarget.style.color=C.teal;e.currentTarget.style.background=`${C.teal}06`}}
+                onMouseOut={e=>{e.currentTarget.style.borderColor='rgba(27,54,93,0.12)';e.currentTarget.style.color=C.steel;e.currentTarget.style.background=C.white}}>
+                {n}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <WaveDivider from={C.light} to={C.navy}/>
 
       {/* CTA */}
-      <section id="contact" style={{ background: '#0d0428', padding: '100px 24px', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at center, rgba(124,58,237,0.2) 0%, transparent 70%)', pointerEvents: 'none' }} />
-        <div style={{ maxWidth: 680, margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
-          <CheckCircle size={48} style={{ color: CYAN, margin: '0 auto 24px' }} />
-          <h2 style={{ fontSize: 'clamp(32px, 5vw, 56px)', fontWeight: 900, lineHeight: 1.1, marginBottom: 20 }}>
-            Ready for the <span style={{ background: `linear-gradient(135deg, ${PURPLE}, ${CYAN})`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Galvon Effect?</span>
+      <section id="contact" style={{ background:C.navy, padding:'100px 24px', position:'relative', overflow:'hidden' }}>
+        <div style={{ position:'absolute', inset:0, background:`radial-gradient(ellipse at 60% 50%, rgba(0,180,216,0.15) 0%, transparent 65%)`, pointerEvents:'none' }}/>
+        <div style={{ maxWidth:680, margin:'0 auto', textAlign:'center', position:'relative', zIndex:1 }}>
+          <CheckCircle size={48} style={{ color:C.teal, margin:'0 auto 24px' }}/>
+          <h2 style={{ fontSize:'clamp(30px,5vw,52px)', fontWeight:900, color:'white', lineHeight:1.1, marginBottom:20 }}>
+            Ready to Transform Your Operations?
           </h2>
-          <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 18, lineHeight: 1.7, marginBottom: 40 }}>Join the plants and utilities that have transformed their operations with the Galvon Industrial Intelligence Suite.</p>
-          <a href="mailto:hello@galvon.com" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: `linear-gradient(135deg, ${PURPLE}, ${CYAN})`, padding: '16px 36px', borderRadius: 14, fontWeight: 800, fontSize: 17, color: 'white', boxShadow: `0 0 40px rgba(124,58,237,0.5)`, textDecoration: 'none' }}>
-            Request a Demo <ArrowRight size={20} />
-          </a>
+          <p style={{ color:'rgba(255,255,255,0.6)', fontSize:17, lineHeight:1.75, marginBottom:40 }}>
+            Join 500+ facilities worldwide running on GALVON. Our team sets up a live demo tailored to your industry within 24 hours.
+          </p>
+          <div style={{ display:'flex', gap:14, justifyContent:'center', flexWrap:'wrap' }}>
+            <a href="mailto:hello@galvon.com" style={{ display:'inline-flex', alignItems:'center', gap:10, background:C.orange, color:'white', padding:'16px 36px', borderRadius:12, fontWeight:800, fontSize:17, textDecoration:'none', boxShadow:`0 8px 28px rgba(255,107,53,0.45)` }}>
+              Schedule a Demo <ArrowRight size={20}/>
+            </a>
+            <a href="https://wa.me/919373111709" style={{ display:'inline-flex', alignItems:'center', gap:8, border:'1px solid rgba(255,255,255,0.3)', color:'rgba(255,255,255,0.85)', padding:'16px 28px', borderRadius:12, fontWeight:600, fontSize:16, textDecoration:'none' }}>
+              <Phone size={18}/> WhatsApp Us
+            </a>
+          </div>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer style={{ background: '#030014', borderTop: '1px solid rgba(124,58,237,0.15)', padding: '40px 24px' }}>
-        <div className="max-w-7xl mx-auto" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 20 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <GalvonLogo size="compact" />
-            <span style={{ fontWeight: 900, letterSpacing: 5, fontSize: 18 }}>GALVON</span>
+      <footer style={{ background:'#0d1b2e', borderTop:`1px solid rgba(0,180,216,0.1)`, padding:'44px 24px' }}>
+        <div style={{ maxWidth:1280, margin:'0 auto', display:'flex', flexWrap:'wrap', alignItems:'center', justifyContent:'space-between', gap:24 }}>
+          <div style={{ display:'flex', alignItems:'center', gap:10 }}>
+            <div style={{ width:32, height:32, borderRadius:10, background:`linear-gradient(135deg, ${C.navy}, ${C.teal})`, display:'flex', alignItems:'center', justifyContent:'center' }}>
+              <Zap size={15} color="white"/>
+            </div>
+            <span style={{ fontWeight:900, letterSpacing:5, fontSize:18, color:'white' }}>GALVON</span>
           </div>
-          <div style={{ display: 'flex', gap: 24, fontSize: 14, color: 'rgba(255,255,255,0.4)' }}>
-            {['Ampris', 'FlowNexus', 'NexaProc'].map(n => <span key={n}>{n}</span>)}
+          <div style={{ display:'flex', gap:24, fontSize:13, color:'rgba(255,255,255,0.35)' }}>
+            {['Ampris','FlowNexus','NexaProc','Industries','About','Contact'].map(n => <a key={n} href={`#${n.toLowerCase()}`} style={{ textDecoration:'none', color:'rgba(255,255,255,0.35)', transition:'color .2s' }} onMouseOver={e=>(e.currentTarget.style.color=C.teal)} onMouseOut={e=>(e.currentTarget.style.color='rgba(255,255,255,0.35)')}>{n}</a>)}
           </div>
-          <div style={{ textAlign: 'right' }}>
-            <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: 13 }}>drmhope.com | A Bettroi Product</div>
-            <div style={{ color: 'rgba(255,255,255,0.25)', fontSize: 11, marginTop: 4 }}>v{VERSION} | {BUILD_DATE} | galvon</div>
+          <div style={{ textAlign:'right' }}>
+            <div style={{ color:'rgba(255,255,255,0.4)', fontSize:13 }}>drmhope.com | A Bettroi Product</div>
+            <div style={{ color:'rgba(255,255,255,0.2)', fontSize:11, marginTop:4 }}>v{VERSION} | {BUILD_DATE} | galvon</div>
           </div>
         </div>
       </footer>
