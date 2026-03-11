@@ -85,7 +85,7 @@ function GalvonLogo({ size = 'full' }: { size?: 'full' | 'compact' }) {
 }
 
 function GalvonDashboard() {
-  const PURPLE = '#7c3aed'; const CYAN = '#06b6d4'; const DIM = 'rgba(255,255,255,0.45)'
+  const PURPLE = '#7c3aed'; const CYAN = '#06b6d4'
   const nodes = [[80,200],[160,160],[240,200],[320,160],[400,200],[240,130]]
   const edges = [[0,1],[1,2],[2,3],[3,4],[1,5],[3,5],[5,2]]
   const barH = [68,52,80,44,72,60,88]
