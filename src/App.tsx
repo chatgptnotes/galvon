@@ -3,30 +3,31 @@ import { Zap, Droplets, Factory, Activity, Shield, Globe, ArrowRight, Waves, Che
 
 const VERSION = '2.0'; const BUILD_DATE = 'March 2026'
 
-// ── GALVON palette ──────────────────────────────────────────────────────
+// ── GALVON palette — Void Phoenix, slightly lighter ──────────────────────────
 const V = {
-  bg:      '#010d08',   // deep void
-  bg2:     '#020f0a',   // midnight void
-  bg3:     '#010b06',   // abyssal void
+  bg:      '#010f0a',   // deep forest void (slightly lighter)
+  bg2:     '#021209',   // midnight teal-green
+  bg3:     '#010d08',   // abyssal
   mint:    '#6ee7b7',   // ethereal mint
   teal:    '#2dd4bf',   // void teal
-  glow:    '#a7f3d0',   // spectral glow
-  lavender:'#c4b5fd',   // phoenix feather lavender
-  violet:  '#a78bfa',   // deep violet
+  glow:    '#5eead4',   // brighter spectral glow
+  lavender:'#e0c8ff',   // bright phoenix feather lavender (more impactful)
+  violet:  '#c084fc',   // vivid violet — more punch
   white:   '#f0fdf4',
-  muted:   'rgba(240,253,244,0.60)',
-  dim:     'rgba(240,253,244,0.32)',
-  dimmer:  'rgba(240,253,244,0.12)',
-  card:    'rgba(6,20,12,0.82)',
-  border:  'rgba(110,231,183,0.15)',
+  muted:   'rgba(240,253,244,0.75)',  // more visible body text
+  dim:     'rgba(240,253,244,0.45)',
+  dimmer:  'rgba(240,253,244,0.15)',
+  card:    'rgba(2,18,10,0.60)',      // more transparent panels
+  border:  'rgba(110,231,183,0.25)', // more visible border
 }
 
 // ── Shared styles ─────────────────────────────────────────────────────────────
 const glass = {
-  background: 'rgba(6,20,12,0.72)',
-  border: `1px solid ${V.border}`,
-  backdropFilter: 'blur(20px)',
+  background: 'rgba(2,18,10,0.45)',   // more translucent
+  border: `1px solid rgba(110,231,183,0.30)`,
+  backdropFilter: 'blur(24px)',
   borderRadius: 16,
+  boxShadow: '0 4px 32px rgba(45,212,191,0.08)',
 }
 
 function Nav({ open, setOpen }: { open: boolean; setOpen: (v: boolean) => void }) {
@@ -96,7 +97,7 @@ export default function App() {
             <h1 style={{ fontSize:'clamp(36px,5vw,64px)', fontWeight:900, lineHeight:1.1, letterSpacing:-2, margin:'0 0 24px' }}>
               <span style={{ color:V.white }}>Industrial Control</span>
               <br />
-              <span style={{ background:`linear-gradient(135deg,${V.lavender} 0%,${V.teal} 50%,${V.glow} 100%)`, WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', filter:`drop-shadow(0 0 20px rgba(196,181,253,0.4))` }}>Born from the Void</span>
+              <span style={{ background:`linear-gradient(135deg,${V.lavender} 0%,${V.teal} 50%,${V.glow} 100%)`, WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', filter:`drop-shadow(0 0 28px rgba(192,132,252,0.7)) drop-shadow(0 0 60px rgba(45,212,191,0.3))` }}>Born from the Void</span>
             </h1>
 
             <p style={{ fontSize:18, color:V.muted, lineHeight:1.7, marginBottom:32, maxWidth:520 }}>
@@ -180,7 +181,7 @@ export default function App() {
           <div style={{ textAlign:'center', marginBottom:56 }}>
             <div style={{ fontSize:12, fontWeight:700, color:V.teal, letterSpacing:2, textTransform:'uppercase', marginBottom:12 }}>The Three Branches</div>
             <h2 style={{ fontSize:'clamp(28px,4vw,48px)', fontWeight:800, letterSpacing:-1, margin:'0 0 16px' }}>
-              The Galvon <span style={{ background:`linear-gradient(135deg,${V.lavender},${V.teal})`, WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>Tree of Control</span>
+              The Galvon <span style={{ background:`linear-gradient(135deg,${V.lavender} 0%,${V.teal} 50%,${V.glow} 100%)`, WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', filter:`drop-shadow(0 0 20px rgba(192,132,252,0.5))` }}>Tree of Control</span>
             </h2>
             <p style={{ fontSize:16, color:V.muted, maxWidth:560, margin:'0 auto' }}>Three verticals grow from one root — each sovereign, all unified under Galvon's ethereal canopy.</p>
           </div>
@@ -267,7 +268,7 @@ export default function App() {
         <div style={{ position:'relative', maxWidth:1200, margin:'0 auto', textAlign:'center' }}>
           <div style={{ fontSize:12, fontWeight:700, color:V.lavender, letterSpacing:2, textTransform:'uppercase', marginBottom:12 }}>Constellation of Industries</div>
           <h2 style={{ fontSize:'clamp(28px,4vw,48px)', fontWeight:800, letterSpacing:-1, marginBottom:16 }}>
-            Where the <span style={{ background:`linear-gradient(135deg,${V.lavender},${V.teal})`, WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>Phoenix Soars</span>
+            Where the <span style={{ background:`linear-gradient(135deg,${V.lavender} 0%,${V.teal} 50%,${V.glow} 100%)`, WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', filter:`drop-shadow(0 0 20px rgba(45,212,191,0.5))` }}>Phoenix Soars</span>
           </h2>
           <p style={{ fontSize:16, color:V.muted, maxWidth:520, margin:'0 auto 48px' }}>From power substations to water treatment, oil terminals to smart factories — Galvon rises in every sector.</p>
           <div style={{ display:'flex', flexWrap:'wrap', gap:16, justifyContent:'center' }}>
