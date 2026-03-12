@@ -143,7 +143,7 @@ export default function App() {
 
   const products = [
     { name:'Ampris', sub:'Power & Electrical SCADA', icon:Zap, color:W.cyan, desc:'Real-time monitoring, fault detection, load balancing, and energy analytics for substations, grids, and power utilities.', useCase:'Monitor a 50MW solar farm with 99.9% accuracy and predictive fault alerts.' },
-    { name:'FlowNexus', sub:'Flow & Liquid SCADA', icon:Droplets, color:W.blue, desc:'Pipeline monitoring, leak detection, pressure optimisation, and compliance reporting for water, wastewater, and fluid systems.', useCase:'Reduce non-revenue water losses by 30% across a 200km municipal network.' },
+    { name:'FlowNexus', sub:'Flow & Liquid SCADA', icon:Droplets, color:W.blue, desc:'Pipeline monitoring, leak detection, pressure optimisation, and compliance reporting for water, wastewater, and fluid systems.', useCase:'Reduce non-revenue water losses by 30% across a 200km municipal network.', url:'https://flownexus.work' },
     { name:'NexaProc', sub:'Factory & Process SCADA', icon:Factory, color:W.ice, desc:'Batch control, OEE tracking, recipe management, and quality monitoring for pharmaceutical, chemical, and manufacturing plants.', useCase:'Improve OEE from 62% to 78% in pharmaceutical manufacturing.' },
   ]
 
@@ -315,7 +315,7 @@ export default function App() {
                   <div style={{ fontSize:10, color:p.color, fontWeight:700, marginBottom:5, letterSpacing:2 }}>USE CASE</div>
                   <p style={{ color:W.muted, fontSize:13, lineHeight:1.55 }}>{p.useCase}</p>
                 </div>
-                <a href={`#${p.name.toLowerCase()}`} style={{ display:'flex', alignItems:'center', gap:6, color:p.color, fontSize:14, fontWeight:700, textDecoration:'none' }}>
+                <a href={(p as {url?:string}).url || `#${p.name.toLowerCase()}`} target={(p as {url?:string}).url ? '_blank' : undefined} rel={(p as {url?:string}).url ? 'noopener noreferrer' : undefined} style={{ display:'flex', alignItems:'center', gap:6, color:p.color, fontSize:14, fontWeight:700, textDecoration:'none' }}>
                   Explore {p.name} <ChevronRight size={16}/>
                 </a>
               </div>
