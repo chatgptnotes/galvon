@@ -3,7 +3,7 @@ import { Zap, Droplets, Factory, Activity, Shield, Globe, ArrowRight, Waves, Che
 
 const VERSION = '2.0'; const BUILD_DATE = 'March 2026'
 
-// ── VOID PHOENIX palette ──────────────────────────────────────────────────────
+// ── GALVON palette ──────────────────────────────────────────────────────
 const V = {
   bg:      '#010d08',   // deep void
   bg2:     '#020f0a',   // midnight void
@@ -90,7 +90,7 @@ export default function App() {
             {/* Badge */}
             <div style={{ display:'inline-flex', alignItems:'center', gap:8, padding:'6px 16px', borderRadius:100, background:'rgba(196,181,253,0.08)', border:`1px solid rgba(196,181,253,0.2)`, marginBottom:24 }}>
               <span style={{ width:6, height:6, borderRadius:'50%', background:V.lavender, boxShadow:`0 0 8px ${V.lavender}` }}/>
-              <span style={{ fontSize:12, fontWeight:600, color:V.lavender, letterSpacing:1.5, textTransform:'uppercase' }}>Void Phoenix Industrial Suite</span>
+              <span style={{ fontSize:12, fontWeight:600, color:V.lavender, letterSpacing:1.5, textTransform:'uppercase' }}>Galvon Industrial Suite</span>
             </div>
 
             <h1 style={{ fontSize:'clamp(36px,5vw,64px)', fontWeight:900, lineHeight:1.1, letterSpacing:-2, margin:'0 0 24px' }}>
@@ -180,7 +180,7 @@ export default function App() {
           <div style={{ textAlign:'center', marginBottom:56 }}>
             <div style={{ fontSize:12, fontWeight:700, color:V.teal, letterSpacing:2, textTransform:'uppercase', marginBottom:12 }}>The Three Branches</div>
             <h2 style={{ fontSize:'clamp(28px,4vw,48px)', fontWeight:800, letterSpacing:-1, margin:'0 0 16px' }}>
-              The Void Phoenix <span style={{ background:`linear-gradient(135deg,${V.lavender},${V.teal})`, WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>Tree of Control</span>
+              The Galvon <span style={{ background:`linear-gradient(135deg,${V.lavender},${V.teal})`, WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>Tree of Control</span>
             </h2>
             <p style={{ fontSize:16, color:V.muted, maxWidth:560, margin:'0 auto' }}>Three verticals grow from one root — each sovereign, all unified under Galvon's ethereal canopy.</p>
           </div>
@@ -319,7 +319,7 @@ export default function App() {
             <Zap size={14} color="#fff"/>
           </div>
           <span style={{ fontSize:16, fontWeight:800, color:V.white }}>GALVON</span>
-          <span style={{ color:V.dim, fontSize:12 }}>· Void Phoenix Industrial Suite</span>
+          <span style={{ color:V.dim, fontSize:12 }}>· Galvon Industrial Suite</span>
         </div>
         <div style={{ display:'flex', gap:24, justifyContent:'center', flexWrap:'wrap', marginBottom:16 }}>
           {[['Ampris','https://ampris.vercel.app'],['FlowNexus','https://flownexus.work'],['NexaProc','https://nexaproc.vercel.app']].map(([n,u])=>(
